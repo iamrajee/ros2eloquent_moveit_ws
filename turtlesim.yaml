@@ -1,0 +1,6 @@
+turtlesim:
+  ros__parameters:
+    background_b: 255
+    background_g: 86
+    background_r: 150
+    use_sim_time: false
