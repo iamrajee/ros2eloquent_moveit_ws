@@ -1,22 +1,22 @@
 # ROS2 eloquent Workspace
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_catkin_ws.svg)](http://badges.mit-license.org) [![GitHub Issues](https://img.shields.io/github/issues/iamrajee/ros2eloquent_catkin_ws.svg)](https://github.com/iamrajee/ros2eloquent_catkin_ws/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/iamrajee/ros2eloquent_catkin_ws.svg)](https://github.com/iamrajee/ros2eloquent_catkin_ws/pulls) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![Gitter](https://badges.gitter.im/iamrajee-ROS/community.svg)](https://gitter.im/iamrajee-ROS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Join our Slack Workspace](https://img.shields.io/badge/Slack%20Workspace-roboticsclubiitpkd.slack.com-blue.svg?logo=slack&longCache=true&style=flat)](https://roboticsclubiitpkd.slack.com) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://www.firsttimersonly.com/)
+[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_moveit_ws.svg)](http://badges.mit-license.org) [![GitHub Issues](https://img.shields.io/github/issues/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/pulls) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![Gitter](https://badges.gitter.im/iamrajee-ROS/community.svg)](https://gitter.im/iamrajee-ROS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Join our Slack Workspace](https://img.shields.io/badge/Slack%20Workspace-roboticsclubiitpkd.slack.com-blue.svg?logo=slack&longCache=true&style=flat)](https://roboticsclubiitpkd.slack.com) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://www.firsttimersonly.com/)
 
 
 This ROS eloquent workspace is created on Ubuntu 18.04.
 <br/><br/>
 
 ## Table of content
-- [Maintainer](https://github.com/iamrajee/ros2eloquent_catkin_ws#maintainer)
-- [Installation](https://github.com/iamrajee/ros2eloquent_catkin_ws#installation)
-- [Package description](https://github.com/iamrajee/ros2eloquent_catkin_ws#package-description)
-- [Helper scripts](https://github.com/iamrajee/ros2eloquent_catkin_ws#helper-scripts)
-- [Team](https://github.com/iamrajee/ros2eloquent_catkin_ws#team)
-- [Contributing](https://github.com/iamrajee/ros2eloquent_catkin_ws#contributing)
-- [FAQ](https://github.com/iamrajee/ros2eloquent_catkin_ws#faq)
-- [Support](https://github.com/iamrajee/ros2eloquent_catkin_ws#support)
-- [License](https://github.com/iamrajee/ros2eloquent_catkin_ws#license)
-- [Acknowledgments](https://github.com/iamrajee/ros2eloquent_catkin_ws#acknowledgments)
+- [Maintainer](https://github.com/iamrajee/ros2eloquent_moveit_ws#maintainer)
+- [Installation](https://github.com/iamrajee/ros2eloquent_moveit_ws#installation)
+- [Package description](https://github.com/iamrajee/ros2eloquent_moveit_ws#package-description)
+- [Helper scripts](https://github.com/iamrajee/ros2eloquent_moveit_ws#helper-scripts)
+- [Team](https://github.com/iamrajee/ros2eloquent_moveit_ws#team)
+- [Contributing](https://github.com/iamrajee/ros2eloquent_moveit_ws#contributing)
+- [FAQ](https://github.com/iamrajee/ros2eloquent_moveit_ws#faq)
+- [Support](https://github.com/iamrajee/ros2eloquent_moveit_ws#support)
+- [License](https://github.com/iamrajee/ros2eloquent_moveit_ws#license)
+- [Acknowledgments](https://github.com/iamrajee/ros2eloquent_moveit_ws#acknowledgments)
 <!--- - [xyz](link) --->
 
 ---
@@ -39,12 +39,12 @@ This ROS eloquent workspace is created on Ubuntu 18.04.
 - #### Clone
 
     ```
-    git clone https://github.com/iamrajee/ros2eloquent_catkin_ws.git
+    git clone https://github.com/iamrajee/ros2eloquent_moveit_ws.git
     ```
 
 - #### Setup
     ```
-    cd ros2eloquent_catkin_ws/
+    cd ros2eloquent_moveit_ws/
     ./refresh.sh
     make
     ```
@@ -145,7 +145,7 @@ This ROS eloquent workspace is created on Ubuntu 18.04.
     - 🍴 Fork this repo!
 
 - **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/iamrajee/ros2eloquent_catkin_ws.git`
+    - 👯 Clone this repo to your local machine using `https://github.com/iamrajee/ros2eloquent_moveit_ws.git`
 
 ### Step 2
 
@@ -153,7 +153,7 @@ This ROS eloquent workspace is created on Ubuntu 18.04.
 
 ### Step 3
 
-- 🔃 Create a new pull request using <a href="https://github.com/iamrajee/ros2eloquent_catkin_ws/compare/" target="_blank">`https://github.com/iamrajee/ros2eloquent_catkin_ws/compare/`</a>.
+- 🔃 Create a new pull request using <a href="https://github.com/iamrajee/ros2eloquent_moveit_ws/compare/" target="_blank">`https://github.com/iamrajee/ros2eloquent_moveit_ws/compare/`</a>.
 ---
 
 ## FAQ
@@ -174,7 +174,7 @@ Reach out to me at one of the following places!
 
 ## License
 
-[![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_catkin_ws.svg)](http://badges.mit-license.org)
+[![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_moveit_ws.svg)](http://badges.mit-license.org)
 
 - **[MIT license](http://opensource.org/licenses/mit-license.php)**
 - Copyright (c) 2019 [Rajendra Singh](https://iamrajee.github.io/).
