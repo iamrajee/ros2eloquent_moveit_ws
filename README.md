@@ -52,8 +52,19 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 
 
 ## Package description
-* ## [testpkg](src/testpkg)
-    > testpkg pkg if first package.
+
+* ## [testpkg_cmake](src/testpkg_cmake)
+    > It is package about: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
+* ## [testpkg_python](src/testpkg_python)
+    > It is package about: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
+* ## [testpkg2](src/testpkg_simple)
+    > It is package about: testing!
+* ## [moveit2](src/moveit2)
+    > It is package about usage moveit2 for motion planning,
+    * ### Run demo
+    ```
+    ros2 launch run_moveit_cpp run_moveit_cpp.launch.py
+    ```
 
 ---
 <br/><br/>
