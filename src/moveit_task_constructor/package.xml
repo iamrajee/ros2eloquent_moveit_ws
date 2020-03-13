@@ -3,7 +3,7 @@
 <package format="3">
   <name>moveit_task_constructor</name>
   <version>0.0.0</version>
-  <description>TODO: Package description</description>
+  <description>This package enhances current moveit2 capabilities</description>
   <maintainer email="singh.raj1997@gmail.com">rajendra</maintainer>
   <license>TODO: License declaration</license>
 
