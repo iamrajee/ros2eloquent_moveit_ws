@@ -17,6 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(moveit_core REQUIRED)
 
 add_executable(cpp_node src/cpp_node.cpp)
 target_include_directories(cpp_node PUBLIC
