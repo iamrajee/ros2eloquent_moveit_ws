@@ -15,26 +15,27 @@ find_package(moveit_core REQUIRED COMPONENTS
   rclcpp
   moveit_core
   moveit_ros_planning 
-	moveit_msgs
+  moveit_msgs
   moveit_ros_planning_interface
   rosidl_default_runtime
 )
 
 include_directories(
-	include
-	${moveit_core_INCLUDE_DIRS}
+  include
+  ${moveit_core_INCLUDE_DIRS}
   ${moveit_ros_planning_INCLUDE_DIRS}
-  ${moveit_ros_planning_interface_INCLUDE_DIRS2}
+  ${moveit_ros_planning_interface_INCLUDE_DIRS}
+  ${moveit_msgs_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}_subtasks
-	src/subtasks/move.cpp
-	src/subtasks/current_state.cpp
+  src/subtasks/move.cpp
+  src/subtasks/current_state.cpp
 )
 
 add_library(${PROJECT_NAME}
-	src/subtask.cpp
-	src/task.cpp
+  src/subtask.cpp
+  src/task.cpp
 )
 
 add_executable(test_plan_current_state src/test/test_plan_current_state.cpp)
