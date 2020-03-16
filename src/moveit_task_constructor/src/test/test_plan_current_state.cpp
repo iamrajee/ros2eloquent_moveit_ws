@@ -12,7 +12,7 @@
 using namespace moveit::task_constructor;
 
 int main(int argc, char** argv){
-	rclcpp::init(argc, argv);
+	// rclcpp::init(argc, argv);
 
 	Task t;
 
@@ -20,6 +20,6 @@ int main(int argc, char** argv){
 
 	t.plan();
 
-	rclcpp::shutdown();
+	// rclcpp::shutdown();
 	return 0;
 }

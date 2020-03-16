@@ -23,6 +23,8 @@ find_package(moveit_core REQUIRED COMPONENTS
 include_directories(
 	include
 	${moveit_core_INCLUDE_DIRS}
+  ${moveit_ros_planning_INCLUDE_DIRS}
+  ${moveit_ros_planning_interface_INCLUDE_DIRS2}
 )
 
 add_library(${PROJECT_NAME}_subtasks
