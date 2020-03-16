@@ -2,7 +2,7 @@
 #include <moveit_task_constructor/subtasks/current_state.h>
 
 #include <rclcpp/rclcpp.hpp>
-#include <moveit_msgs/GetPlanningScene.h>
+// #include <moveit_msgs/GetPlanningScene.h>
 
 bool
 moveit::task_constructor::subtasks::CurrentState::canCompute(){
@@ -44,6 +44,6 @@ moveit::task_constructor::subtasks::CurrentState::compute(){
 	ps->setPlanningSceneMsg(res.scene);
 
 	sendBothWays(traj, ps);
-	*/
 	return true;
+	*/
 }
