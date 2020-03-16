@@ -1,25 +1,24 @@
 cmake_minimum_required(VERSION 3.5)
 project(moveit_task_constructor)
 
-# Default to C99
-if(NOT CMAKE_C_STANDARD)
-  set(CMAKE_C_STANDARD 99)
-endif()
-
 if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra)# -Wpedantic)
+  add_compile_options(-Wall -Wextra) # flag -Wpedantic generate nested namespace warning
 endif()
-
-
-
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(moveit_core REQUIRED)
+find_package(moveit_core REQUIRED COMPONENTS
+  rclcpp
+  moveit_core
+  moveit_ros_planning 
+	moveit_msgs
+  moveit_ros_planning_interface
+  rosidl_default_runtime
+)
 
 include_directories(
 	include
@@ -30,22 +29,17 @@ add_library(${PROJECT_NAME}_subtasks
 	src/subtasks/move.cpp
 	src/subtasks/current_state.cpp
 )
-# add_dependencies(${PROJECT_NAME}_subtasks ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 add_library(${PROJECT_NAME}
 	src/subtask.cpp
 	src/task.cpp
 )
-# add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 
 add_executable(test_plan_current_state src/test/test_plan_current_state.cpp)
 target_link_libraries(test_plan_current_state ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
 
 add_executable(plan_pick src/plan_pick.cpp)
 target_link_libraries(plan_pick ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
-
-# add_executable(subtask src/subtask.cpp)
-# target_link_libraries(subtask ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
 
 add_executable(cpp_node src/cpp_node.cpp)
 target_include_directories(cpp_node PUBLIC
