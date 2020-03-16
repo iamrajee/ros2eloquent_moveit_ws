@@ -1,3 +1,9 @@
+#include <rclcpp/rclcpp.hpp>
+
+#include <chrono>
+#include <cstdlib>
+#include <memory>
+
 #include <moveit_task_constructor/task.h>
 #include <moveit_task_constructor/subtask.h>
 
@@ -5,7 +11,8 @@
 
 using namespace moveit::task_constructor;
 
-int main(){
+int main(int argc, char** argv){
+	rclcpp::init(argc, argv);
 
 	Task t;
 
@@ -13,5 +20,6 @@ int main(){
 
 	t.plan();
 
+	rclcpp::shutdown();
 	return 0;
 }
