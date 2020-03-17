@@ -1,15 +1,16 @@
+#include <rclcpp/rclcpp.hpp>
 #include <moveit_task_constructor/task.h>
-#include <moveit_task_constructor/subtask.h>
 
 #include <moveit_task_constructor/subtasks/current_state.h>
+#include <moveit_task_constructor/subtasks/gripper.h>
 
 using namespace moveit::task_constructor;
 
-int main(){
-// /*
-	Task t;
+int main(int argc, char** argv){
+    rclcpp::init(argc, argv);
+    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("test_plan_gripper"); //std::shared_ptr<int> foo = std::make_shared<int> (10);
 
-	std::shared_ptr<int> foo = std::make_shared<int> (10);
+	Task t;
 
 	t.addStart( std::make_shared<subtasks::CurrentState>("current state") );
 /*
@@ -57,5 +58,7 @@ int main(){
 */
 	t.plan();
 
+	rclcpp::spin(node);
+	rclcpp::shutdown();
 	return 0;
 }
