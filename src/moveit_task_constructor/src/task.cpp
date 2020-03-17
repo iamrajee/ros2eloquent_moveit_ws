@@ -3,56 +3,41 @@
 #include <moveit/robot_model_loader/robot_model_loader.h> 
 #include <rclcpp/rclcpp.hpp>
 
-// #include <moveit_msgs/GetPlanningScene.h> //work for ros1 only not for ros2
-// #include <moveit_msgs/get_planning_scene.h> //dont work
-#include <moveit_msgs/srv/get_planning_scene.h> //!!!important
-// #include <moveit_msgs/srv/get_planning_scene.hpp>
-// #include <moveit/exceptions/exceptions.h>
-
-
-// #include <moveit/moveit_cpp/moveit_cpp.h>
-// #include <moveit/moveit_cpp/planning_component.h>
-// #include <moveit/robot_state/conversions.h>
-// #include <moveit_msgs/msg/display_robot_state.hpp>
-// #include <trajectory_msgs/msg/joint_trajectory.hpp>
+#include <moveit_msgs/srv/get_planning_scene.hpp>
 
 moveit::task_constructor::Task::Task()
 {
-	// /*
-	// rml_.reset(new robot_model_loader::RobotModelLoader);
-	// if( !rml_->getModel() )
-	// throw Exception("Task failed to construct RobotModel");
+	// rml_.reset(new robot_model_loader::RobotModelLoader); //error
+	if( !rml_->getModel() )
+	throw Exception("Task failed to construct RobotModel");
 
-	// std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_client");
-	// rclcpp::Client<moveit_msgs::srv::GetPlanningScene>::SharedPtr client = node->create_client<moveit_msgs::srv::GetPlanningScene>("get_planning_scene");
+	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_client");
+	rclcpp::Client<moveit_msgs::srv::GetPlanningScene>::SharedPtr client = node->create_client<moveit_msgs::srv::GetPlanningScene>("get_planning_scene");
+	client->wait_for_service(); //client.waitForExistence();
 
-	/*
-	ros::NodeHandle h;
-	ros::ServiceClient client = h.serviceClient<moveit_msgs::GetPlanningScene>("get_planning_scene");
-	client.waitForExistence();
-
-	moveit_msgs::GetPlanningScene::Request req;
-	moveit_msgs::GetPlanningScene::Response res;
-
+	moveit_msgs::srv::GetPlanningScene::Request req;
+	moveit_msgs::srv::GetPlanningScene::Response res;
+	
 	req.components.components =
-		moveit_msgs::PlanningSceneComponents::SCENE_SETTINGS
-		| moveit_msgs::PlanningSceneComponents::ROBOT_STATE
-		| moveit_msgs::PlanningSceneComponents::ROBOT_STATE_ATTACHED_OBJECTS
-		| moveit_msgs::PlanningSceneComponents::WORLD_OBJECT_NAMES
-		| moveit_msgs::PlanningSceneComponents::WORLD_OBJECT_GEOMETRY
-		| moveit_msgs::PlanningSceneComponents::OCTOMAP
-		| moveit_msgs::PlanningSceneComponents::TRANSFORMS
-		| moveit_msgs::PlanningSceneComponents::ALLOWED_COLLISION_MATRIX
-		| moveit_msgs::PlanningSceneComponents::LINK_PADDING_AND_SCALING
-		| moveit_msgs::PlanningSceneComponents::OBJECT_COLORS;
-
-	if(!client.call(req, res)){
-		throw Exception("Task failed to aquire current PlanningScene");
-	}
-
-	planning_scene::PlanningScenePtr ps(new planning_scene::PlanningScene(rml_->getModel()));
-	ps->setPlanningSceneMsg(res.scene);
-	*/
+		  moveit_msgs::msg::PlanningSceneComponents::SCENE_SETTINGS
+		| moveit_msgs::msg::PlanningSceneComponents::ROBOT_STATE
+		| moveit_msgs::msg::PlanningSceneComponents::ROBOT_STATE_ATTACHED_OBJECTS
+		| moveit_msgs::msg::PlanningSceneComponents::WORLD_OBJECT_NAMES
+		| moveit_msgs::msg::PlanningSceneComponents::WORLD_OBJECT_GEOMETRY
+		| moveit_msgs::msg::PlanningSceneComponents::OCTOMAP
+		| moveit_msgs::msg::PlanningSceneComponents::TRANSFORMS
+		| moveit_msgs::msg::PlanningSceneComponents::ALLOWED_COLLISION_MATRIX
+		| moveit_msgs::msg::PlanningSceneComponents::LINK_PADDING_AND_SCALING
+		| moveit_msgs::msg::PlanningSceneComponents::OBJECT_COLORS;
+	
+	// if(!client.call(req, res)){
+		// throw Exception("Task failed to aquire current PlanningScene");
+	// }
+	// client->async_send_request(req); //new
+	// planning_scene::PlanningScenePtr ps(new planning_scene::PlanningScene(rml_->getModel()));
+	// ps->setPlanningSceneMsg(res.scene);
+	scene_.reset(new planning_scene::PlanningScene(rml_->getModel()));
+	scene_->setPlanningSceneMsg(res.scene);
 }
 
 void moveit::task_constructor::Task::addStart( SubTaskPtr subtask ){

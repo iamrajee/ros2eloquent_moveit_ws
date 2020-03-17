@@ -13,15 +13,15 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(moveit_ros_planning REQUIRED) #important call it seperately
 find_package(moveit_msgs REQUIRED)
-find_package(rclcpp REQUIRED)
+# find_package(rclcpp REQUIRED)
+find_package(rcutils REQUIRED)
 find_package(moveit_core REQUIRED COMPONENTS
-  # rclcpp
   Boost 
   moveit_core
-  moveit_ros_planning 
   moveit_msgs
   moveit_ros_planning_interface
   rosidl_default_runtime
+  # rcutils
 )
 
 include_directories(
@@ -32,36 +32,45 @@ include_directories(
   ${moveit_core_INCLUDE_DIRS}
   ${moveit_msgs_INCLUDE_DIRS}
   ${moveit_ros_planning_INCLUDE_DIRS} #important
-  # moveit_ros_planning/robot_model_loader/include #not need
   ${moveit_ros_planning_interface_INCLUDE_DIRS}
   ${moveit_msgs_INCLUDE_DIRS}
-
+  ${rcutils_INCLUDE_DIRS}
 )
-
-# target_link_libraries(${MOVEIT_LIB_NAME}
-#   moveit_rdf_loader
-#   moveit_kinematics_plugin_loader
-# )
 
 add_library(${PROJECT_NAME}_subtasks
   src/subtasks/move.cpp
   src/subtasks/current_state.cpp
-  # ${moveit_ros_planning_LIBRARIES} #wrong
-  # ${moveit_ros_planning_LIBS}
+  src/subtasks/gripper.cpp
 )
 
 add_library(${PROJECT_NAME}
   src/subtask.cpp
   src/task.cpp
-  # ${moveit_ros_planning_LIBRARIES}
-  # ${moveit_ros_planning_LIBS}
 )
 
-add_executable(test_plan_current_state src/test/test_plan_current_state.cpp)
-target_link_libraries(test_plan_current_state ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
+set(dep_list 
+  "rclcpp"
+  "moveit_msgs"
+  "moveit_ros_planning"
+)
+ament_target_dependencies(${PROJECT_NAME}_subtasks ${dep_list})
+ament_target_dependencies(${PROJECT_NAME} ${dep_list}) #!!! important both rclcpp and moveit_msgs
+
+
 
 add_executable(plan_pick src/plan_pick.cpp)
+ament_target_dependencies(plan_pick ${dep_list})
 target_link_libraries(plan_pick ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
+
+add_executable(test_plan_current_state src/test/test_plan_current_state.cpp)
+ament_target_dependencies(test_plan_current_state ${dep_list}) #!!! important both rclcpp to avoid unrefernced error
+target_link_libraries(test_plan_current_state ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
+
+add_executable(test_plan_gripper src/test/test_plan_gripper.cpp)
+ament_target_dependencies(test_plan_gripper ${dep_list})
+target_link_libraries(test_plan_gripper ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
+
+
 
 add_executable(cpp_node src/cpp_node.cpp)
 target_include_directories(cpp_node PUBLIC
