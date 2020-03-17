@@ -9,7 +9,7 @@
 
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("moveit_cpp_demo");
 
-class MoveItCppDemo
+class MoveItCppDemo 
 { 
 public:
   MoveItCppDemo(const rclcpp::Node::SharedPtr& node): node_(node), robot_state_publisher_(node_->create_publisher<moveit_msgs::msg::DisplayRobotState>("display_robot_state", 1)), trajectory_publisher_(node_->create_publisher<trajectory_msgs::msg::JointTrajectory>("/fake_joint_trajectory_controller/joint_trajectory", 1)){}

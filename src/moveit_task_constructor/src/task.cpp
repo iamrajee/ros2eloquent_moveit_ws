@@ -1,30 +1,32 @@
 #include <moveit_task_constructor/task.h>
 #include <moveit_task_constructor/subtask.h>
-
+#include <moveit/robot_model_loader/robot_model_loader.h> 
 #include <rclcpp/rclcpp.hpp>
 
-// #include <moveit_msgs/GetPlanningScene.h>
+// #include <moveit_msgs/GetPlanningScene.h> //work for ros1 only not for ros2
+// #include <moveit_msgs/get_planning_scene.h> //dont work
+#include <moveit_msgs/srv/get_planning_scene.h> //!!!important
+// #include <moveit_msgs/srv/get_planning_scene.hpp>
+// #include <moveit/exceptions/exceptions.h>
 
-// #include <moveit/robot_model_loader/robot_model_loader.h>
 
 // #include <moveit/moveit_cpp/moveit_cpp.h>
 // #include <moveit/moveit_cpp/planning_component.h>
-#include <moveit/robot_state/conversions.h>
-#include <moveit_msgs/msg/display_robot_state.hpp>
-#include <trajectory_msgs/msg/joint_trajectory.hpp>
-
-#include "/home/rajendra/ros2eloquent_moveit_ws/src/moveit2/moveit_ros/planning/rdf_loader/include/moveit/rdf_loader/rdf_loader.h"
-#include "/home/rajendra/ros2eloquent_moveit_ws/src/moveit2/moveit_ros/planning/kinematics_plugin_loader/include/moveit/kinematics_plugin_loader/kinematics_plugin_loader.h"
-// #include <moveit/robot_model_loader/robot_model_loader.h>
-#include "/home/rajendra/ros2eloquent_moveit_ws/src/moveit2/moveit_ros/planning/robot_model_loader/include/moveit/robot_model_loader/robot_model_loader.h"
+// #include <moveit/robot_state/conversions.h>
+// #include <moveit_msgs/msg/display_robot_state.hpp>
+// #include <trajectory_msgs/msg/joint_trajectory.hpp>
 
 moveit::task_constructor::Task::Task()
 {
-	/*
-	rml_.reset(new robot_model_loader::RobotModelLoader);
-	if( !rml_->getModel() )
-	throw Exception("Task failed to construct RobotModel");
+	// /*
+	// rml_.reset(new robot_model_loader::RobotModelLoader);
+	// if( !rml_->getModel() )
+	// throw Exception("Task failed to construct RobotModel");
 
+	// std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_client");
+	// rclcpp::Client<moveit_msgs::srv::GetPlanningScene>::SharedPtr client = node->create_client<moveit_msgs::srv::GetPlanningScene>("get_planning_scene");
+
+	/*
 	ros::NodeHandle h;
 	ros::ServiceClient client = h.serviceClient<moveit_msgs::GetPlanningScene>("get_planning_scene");
 	client.waitForExistence();

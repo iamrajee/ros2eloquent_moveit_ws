@@ -11,8 +11,12 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(moveit_ros_planning REQUIRED) #important call it seperately
+find_package(moveit_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
 find_package(moveit_core REQUIRED COMPONENTS
-  rclcpp
+  # rclcpp
+  Boost 
   moveit_core
   moveit_ros_planning 
   moveit_msgs
@@ -22,20 +26,35 @@ find_package(moveit_core REQUIRED COMPONENTS
 
 include_directories(
   include
+  ${ament_cmake_INCLUDE_DIRS}
+  ${rclcpp_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
   ${moveit_core_INCLUDE_DIRS}
-  ${moveit_ros_planning_INCLUDE_DIRS}
+  ${moveit_msgs_INCLUDE_DIRS}
+  ${moveit_ros_planning_INCLUDE_DIRS} #important
+  # moveit_ros_planning/robot_model_loader/include #not need
   ${moveit_ros_planning_interface_INCLUDE_DIRS}
   ${moveit_msgs_INCLUDE_DIRS}
+
 )
+
+# target_link_libraries(${MOVEIT_LIB_NAME}
+#   moveit_rdf_loader
+#   moveit_kinematics_plugin_loader
+# )
 
 add_library(${PROJECT_NAME}_subtasks
   src/subtasks/move.cpp
   src/subtasks/current_state.cpp
+  # ${moveit_ros_planning_LIBRARIES} #wrong
+  # ${moveit_ros_planning_LIBS}
 )
 
 add_library(${PROJECT_NAME}
   src/subtask.cpp
   src/task.cpp
+  # ${moveit_ros_planning_LIBRARIES}
+  # ${moveit_ros_planning_LIBS}
 )
 
 add_executable(test_plan_current_state src/test/test_plan_current_state.cpp)
@@ -52,6 +71,13 @@ target_include_directories(cpp_node PUBLIC
 install(TARGETS cpp_node test_plan_current_state plan_pick #subtask
   EXPORT export_${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME})
+
+# install(TARGETS ${MOVEIT_LIB_NAME}
+#   ARCHIVE DESTINATION lib
+#   LIBRARY DESTINATION lib
+#   RUNTIME DESTINATION bin)
+
+ament_export_include_directories(include)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
