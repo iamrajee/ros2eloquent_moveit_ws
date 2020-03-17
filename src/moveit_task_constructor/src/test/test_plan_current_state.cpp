@@ -1,7 +1,5 @@
-#include <rcl/rcl.h>
+//#include <rcl/rcl.h>
 #include <rclcpp/rclcpp.hpp>
-//#include "rclcpp/rclcpp.hpp"
-
 
 #include <chrono>
 #include <cstdlib>
@@ -15,8 +13,8 @@
 using namespace moveit::task_constructor;
 
 int main(int argc, char** argv){
-	//rclcpp::init(argc, argv,const rclcpp::InitOptions & init_options = rclcpp::InitOptions());
-	rclcpp::init(argc, argv);
+	//rclcpp::init(argc, argv,const rclcpp::InitOptions & init_options = rclcpp::InitOptions()); //gave linker error
+	//rclcpp::init(argc, argv); //gave linker error
 
 	Task t;
 
@@ -24,6 +22,6 @@ int main(int argc, char** argv){
 
 	t.plan();
 
-	// rclcpp::shutdown();
+	// rclcpp::shutdown(); //gave linker error
 	return 0;
 }
