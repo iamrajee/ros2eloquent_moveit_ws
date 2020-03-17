@@ -8,7 +8,7 @@ using namespace moveit::task_constructor;
 
 int main(int argc, char** argv){
     rclcpp::init(argc, argv);
-    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("test_plan_gripper"); //std::shared_ptr<int> foo = std::make_shared<int> (10);
+    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("plan_pick"); //std::shared_ptr<int> foo = std::make_shared<int> (10);
 
 	Task t;
 
@@ -57,6 +57,8 @@ int main(int argc, char** argv){
 	}
 */
 	t.plan();
+
+	t.printState();
 
 	rclcpp::spin(node);
 	rclcpp::shutdown();

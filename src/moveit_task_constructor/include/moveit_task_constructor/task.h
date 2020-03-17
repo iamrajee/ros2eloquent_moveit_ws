@@ -23,11 +23,14 @@ MOVEIT_CLASS_FORWARD(Task);
 class Task {
 public:
 	Task();
+	~Task();
 
 	void addStart( SubTaskPtr );
 	void addAfter( SubTaskPtr );
 
 	bool plan();
+
+	void printState();
 
 protected:
 	void addSubTask( SubTaskPtr );

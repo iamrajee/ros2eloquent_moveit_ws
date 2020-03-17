@@ -12,6 +12,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(moveit_ros_planning REQUIRED) #important call it seperately
+find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
 # find_package(rclcpp REQUIRED)
 find_package(rcutils REQUIRED)
@@ -19,7 +20,6 @@ find_package(moveit_core REQUIRED COMPONENTS
   Boost 
   moveit_core
   moveit_msgs
-  moveit_ros_planning_interface
   rosidl_default_runtime
   # rcutils
 )
@@ -52,6 +52,7 @@ set(dep_list
   "rclcpp"
   "moveit_msgs"
   "moveit_ros_planning"
+  "moveit_ros_planning_interface"
 )
 ament_target_dependencies(${PROJECT_NAME}_subtasks ${dep_list})
 ament_target_dependencies(${PROJECT_NAME} ${dep_list}) #!!! important both rclcpp and moveit_msgs
@@ -77,7 +78,7 @@ target_include_directories(cpp_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-install(TARGETS cpp_node test_plan_current_state plan_pick #subtask
+install(TARGETS cpp_node test_plan_current_state plan_pick test_plan_gripper
   EXPORT export_${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME})
 

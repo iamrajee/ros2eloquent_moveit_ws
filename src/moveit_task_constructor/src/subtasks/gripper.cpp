@@ -4,7 +4,8 @@
 #include <moveit/robot_state/conversions.h>
 
 // #include <moveit/move_group_interface/move_group_interface.h>
-/*
+#include <moveit/moveit_cpp/moveit_cpp.h>
+
 moveit::task_constructor::subtasks::Gripper::Gripper(std::string name)
 : moveit::task_constructor::SubTask::SubTask(name)
 {}
@@ -12,9 +13,10 @@ moveit::task_constructor::subtasks::Gripper::Gripper(std::string name)
 void
 moveit::task_constructor::subtasks::Gripper::setGroup(std::string group){
 	group_= group;
-	mgi_.reset(new moveit::planning_interface::MoveGroupInterface(group));
+	// mgi_.reset(new moveit::planning_interface::MoveGroupInterface(group));
+    // mgi_.reset(new moveit::planning_interface::MoveItCpp(group));
 }
-
+/*
 void
 moveit::task_constructor::subtasks::Gripper::setFrom(std::string named_target){
 	from_named_target_= named_target;
@@ -64,4 +66,5 @@ moveit::task_constructor::subtasks::Gripper::compute(){
 
 	return true;
 }
+
 */

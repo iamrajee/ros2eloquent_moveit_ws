@@ -5,10 +5,9 @@
 
 #include <moveit_msgs/srv/get_planning_scene.hpp>
 
-moveit::task_constructor::Task::Task()
-{
+moveit::task_constructor::Task::Task(){
 	// rml_.reset(new robot_model_loader::RobotModelLoader); //error
-	if( !rml_->getModel() )
+	if( !rml_->getModel() )	
 	throw Exception("Task failed to construct RobotModel");
 
 	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_client");
@@ -34,10 +33,13 @@ moveit::task_constructor::Task::Task()
 		// throw Exception("Task failed to aquire current PlanningScene");
 	// }
 	// client->async_send_request(req); //new
-	// planning_scene::PlanningScenePtr ps(new planning_scene::PlanningScene(rml_->getModel()));
-	// ps->setPlanningSceneMsg(res.scene);
 	scene_.reset(new planning_scene::PlanningScene(rml_->getModel()));
 	scene_->setPlanningSceneMsg(res.scene);
+}
+
+moveit::task_constructor::Task::~Task(){
+	subtasks_.clear();
+	scene_.reset();
 }
 
 void moveit::task_constructor::Task::addStart( SubTaskPtr subtask ){
@@ -53,7 +55,7 @@ void moveit::task_constructor::Task::addAfter( SubTaskPtr subtask ){
 
 bool moveit::task_constructor::Task::plan(){
 	for( SubTaskPtr& subtask : subtasks_ ){
-		std::cout << "Computing subtask '" << subtask->getName() << "': ";
+		std::cout << "Computing subtask '" << subtask->getName() << "': " << std::endl;
 		bool success= subtask->compute();
 		std::cout << (success ? "succeeded" : "failed") << std::endl;
 	}
@@ -63,4 +65,15 @@ bool moveit::task_constructor::Task::plan(){
 void moveit::task_constructor::Task::addSubTask( SubTaskPtr subtask ){
 	subtask->setPlanningScene( scene_ );
 	subtasks_.push_back( subtask );
+}
+
+void moveit::task_constructor::Task::printState(){
+	for( auto& st : subtasks_ ){
+		std::cout
+			<< st->getBegin().size() << " -> "
+			<< st->getTrajectories().size()
+			<< " <- " << st->getEnd().size()
+			<< " / " << st->getName()
+			<< std::endl;
+	}
 }

@@ -8,15 +8,17 @@
 using namespace moveit::task_constructor;
 
 int main(int argc, char** argv){
-    rclcpp::init(argc, argv);
-    /*
-	ros::init(argc, argv, "test_plan_gripper");
-	ros::AsyncSpinner spinner(1);
-	spinner.start();
+    rclcpp::init(argc, argv); // rclcpp::init(argc, argv, "test_plan_gripper");
+    std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("test_plan_gripper");
+    
+	// rclcpp::AsyncSpinner spinner(1);
+	// spinner.start();
 
 	Task t;
-
+    
 	t.addStart( std::make_shared<subtasks::CurrentState>("current state") );
+
+    /*
 	{
 		auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
 		gripper->setGroup("gripper");
@@ -34,5 +36,7 @@ int main(int argc, char** argv){
 	}
 	t.addAfter( std::make_shared<subtasks::CurrentState>("current state") );
     */
+   rclcpp::spin(node);
+   rclcpp::shutdown();
 	return 0;
 }
