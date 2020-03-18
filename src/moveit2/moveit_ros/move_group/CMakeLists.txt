@@ -1,53 +1,46 @@
 cmake_minimum_required(VERSION 3.10.2)
 project(moveit_ros_move_group)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
-if(NOT CMAKE_CONFIGURATION_TYPES AND NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
+if(NOT CMAKE_CXX_STANDARD)
+  set(CMAKE_CXX_STANDARD 14)
 endif()
 
-find_package(Boost REQUIRED system filesystem date_time program_options thread)
-find_package(catkin REQUIRED COMPONENTS
-  moveit_core
-  moveit_ros_planning
-  actionlib
-  roscpp
-  pluginlib
-  std_srvs
-  tf2
-  tf2_geometry_msgs
-  tf2_ros
-)
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-catkin_package(
-  LIBRARIES
-    moveit_move_group_capabilities_base
-  INCLUDE_DIRS
-    include
-  CATKIN_DEPENDS
-    moveit_core
-    moveit_ros_planning
-    tf2_geometry_msgs
-)
+find_package(Boost REQUIRED system)
+find_package(ament_cmake REQUIRED)
+find_package(moveit_core REQUIRED)
+find_package(class_loader REQUIRED)
+find_package(pluginlib REQUIRED)
+find_package(Eigen3 REQUIRED)
+find_package(moveit_ros_planning REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_srvs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(message_filters REQUIRED)
 
-include_directories(include)
-include_directories(${catkin_INCLUDE_DIRS}
-                    ${Boost_INCLUDE_DIRS})
+include_directories(include ${message_filters_INCLUDE_DIRS})
 
-add_library(moveit_move_group_capabilities_base
+add_library(moveit_move_group_capabilities_base SHARED
   src/move_group_context.cpp
   src/move_group_capability.cpp
-  )
+)
+
 set_target_properties(moveit_move_group_capabilities_base PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-add_dependencies(moveit_move_group_capabilities_base ${catkin_EXPORTED_TARGETS}) # wait until all *_msgs packages are finished being built
 
-add_executable(move_group src/move_group.cpp)
+ament_target_dependencies(moveit_move_group_capabilities_base
+  rclcpp
+  Boost
+  moveit_ros_planning
+  moveit_core
+)
 
-add_executable(list_move_group_capabilities src/list_capabilities.cpp)
-
-add_library(moveit_move_group_default_capabilities
+add_library(moveit_move_group_default_capabilities SHARED
   src/default_capabilities/move_action_capability.cpp
   src/default_capabilities/plan_service_capability.cpp
   src/default_capabilities/execute_trajectory_action_capability.cpp
@@ -58,36 +51,88 @@ add_library(moveit_move_group_default_capabilities
   src/default_capabilities/get_planning_scene_service_capability.cpp
   src/default_capabilities/apply_planning_scene_service_capability.cpp
   src/default_capabilities/clear_octomap_service_capability.cpp
-  src/default_capabilities/tf_publisher_capability.cpp
-  )
-set_target_properties(moveit_move_group_default_capabilities PROPERTIES VERSION "${${PROJECT_NAME}_VERSION}")
-add_dependencies(moveit_move_group_default_capabilities ${catkin_EXPORTED_TARGETS})
+)
 
-target_link_libraries(moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(move_group moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(moveit_move_group_default_capabilities moveit_move_group_capabilities_base ${catkin_LIBRARIES} ${Boost_LIBRARIES})
-target_link_libraries(list_move_group_capabilities ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+ament_target_dependencies(moveit_move_group_default_capabilities
+  rclcpp
+  Boost
+  std_srvs
+  moveit_core
+  class_loader
+  rclcpp_action
+  moveit_ros_planning
+)
 
-install(TARGETS move_group list_move_group_capabilities
-  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+target_link_libraries(moveit_move_group_default_capabilities
+  moveit_move_group_capabilities_base
+  ${rclcpp_LIBRARIES}
+  ${rclcpp_action_LIBRARIES}
+)
 
-install(TARGETS moveit_move_group_capabilities_base moveit_move_group_default_capabilities
-  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-  RUNTIME DESTINATION ${CATKIN_GLOBAL_BIN_DESTINATION})
+add_executable(list_move_group_capabilities
+  src/list_capabilities.cpp
+)
 
-install(DIRECTORY include/ DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION})
+ament_target_dependencies(list_move_group_capabilities
+  Boost
+  rclcpp
+  moveit_core
+  pluginlib
+  class_loader
+)
 
-install(PROGRAMS
-  scripts/load_map scripts/save_map DESTINATION
-  ${CATKIN_PACKAGE_BIN_DESTINATION})
+target_link_libraries(list_move_group_capabilities
+  moveit_move_group_default_capabilities
+  moveit_move_group_capabilities_base
+)
 
-install(FILES
-  default_capabilities_plugin_description.xml
-  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
+add_executable(move_group src/move_group.cpp)
+ament_target_dependencies(move_group
+  # moveit_move_group_capabilities_base
+  rclcpp
+  Boost
+  pluginlib
+  tinyxml_vendor
+  class_loader
+  tf2_ros
+  tf2
+  moveit_ros_planning
+  moveit_core
+)
+target_link_libraries(move_group
+  moveit_move_group_capabilities_base
+)
 
-if(CATKIN_ENABLE_TESTING)
-  find_package(rostest REQUIRED)
-  # this test is flaky
-  # add_rostest(test/test_cancel_before_plan_execution.test)
-endif()
+install(TARGETS moveit_move_group_capabilities_base moveit_move_group_default_capabilities list_move_group_capabilities move_group
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME})
+
+install(DIRECTORY include/ DESTINATION include)
+
+pluginlib_export_plugin_description_file(moveit_ros_move_group default_capabilities_plugin_description.xml)
+
+#TODO (ahcorde): Fix python scripts
+# install(PROGRAMS
+#   scripts/load_map scripts/save_map DESTINATION
+#   lib/${PROJECT_NAME})
+
+#TODO (anasarrak): Update the testing once everything is ported to ros2
+# if(BUILD_TESTING)
+#   # find_package(rostest REQUIRED)
+#   # this test is flaky
+#   # add_rostest(test/test_cancel_before_plan_execution.test)
+#   find_package(ament_cmake_xmllint REQUIRED)
+#   find_package(ament_cmake_lint_cmake REQUIRED)
+#   ament_lint_cmake()
+# endif()
+
+ament_export_include_directories(include ${EIGEN3_INCLUDE_DIR})
+
+ament_export_libraries(moveit_move_group_capabilities_base)
+ament_export_dependencies(moveit_core)
+ament_export_dependencies(moveit_ros_planning)
+ament_export_dependencies(tf2_geometry_msgs)
+ament_export_dependencies(class_loader)
+
+ament_package()

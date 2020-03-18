@@ -34,10 +34,11 @@
 
 /* Author: Michael 'v4hn' Goerner */
 
-#pragma once
+#ifndef MOVEIT_MOVE_GROUP_APPLY_PLANNING_SCENE_SERVICE_CAPABILITY_
+#define MOVEIT_MOVE_GROUP_APPLY_PLANNING_SCENE_SERVICE_CAPABILITY_
 
 #include <moveit/move_group/move_group_capability.h>
-#include <moveit_msgs/ApplyPlanningScene.h>
+#include <moveit_msgs/srv/apply_planning_scene.hpp>
 
 namespace move_group
 {
@@ -50,12 +51,15 @@ class ApplyPlanningSceneService : public MoveGroupCapability
 public:
   ApplyPlanningSceneService();
 
-  void initialize() override;
+  void initialize(std::shared_ptr<rclcpp::Node>& node) override;
 
 private:
-  bool applyScene(moveit_msgs::srv::ApplyPlanningScene::Request& req,
-                  moveit_msgs::srv::ApplyPlanningScene::Response& res);
+  void applyScene(const std::shared_ptr<rmw_request_id_t> request_header,
+     const std::shared_ptr<moveit_msgs::srv::ApplyPlanningScene::Request> request,
+     const std::shared_ptr<moveit_msgs::srv::ApplyPlanningScene::Response> response);
 
-  ros::ServiceServer service_;
+  std::shared_ptr<rclcpp::Service<moveit_msgs::srv::ApplyPlanningScene>> service_;
 };
 }
+
+#endif  // MOVEIT_MOVE_GROUP_APPLY_PLANNING_SCENE_SERVICE_CAPABILITY_

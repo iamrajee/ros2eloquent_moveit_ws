@@ -34,7 +34,8 @@
 
 /* Author: Ioan Sucan */
 
-#pragma once
+#ifndef MOVEIT_MOVE_GROUP_NODE_NAME
+#define MOVEIT_MOVE_GROUP_NODE_NAME
 
 #include <string>
 
@@ -42,3 +43,5 @@ namespace move_group
 {
 static const std::string NODE_NAME = "move_group";  // name of node
 }
+
+#endif
