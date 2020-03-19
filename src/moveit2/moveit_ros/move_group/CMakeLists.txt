@@ -101,6 +101,9 @@ ament_target_dependencies(move_group
 )
 target_link_libraries(move_group
   moveit_move_group_capabilities_base
+  # ${Boost_LIBRARIES}
+  # ${rclcpp_LIBRARIES}
+  # ${rclcpp_action_LIBRARIES}
 )
 
 install(TARGETS moveit_move_group_capabilities_base moveit_move_group_default_capabilities list_move_group_capabilities move_group

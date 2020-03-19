@@ -90,8 +90,10 @@ public:
       \param planning_plugin_name The name of the planning plugin to load
       \param adapter_plugins_names The names of the planning request adapter plugins to load
   */
+  std::vector<std::string> a;
   PlanningPipeline(const robot_model::RobotModelConstPtr& model, const std::shared_ptr<rclcpp::Node> node,
-                   const std::string& parameter_namespace, const std::string& planning_plugin_name,
+                   const std::string& parameter_namespace,
+                   const std::string& planning_plugin_name,
                    const std::vector<std::string>& adapter_plugin_names);
 
   /** \brief Pass a flag telling the pipeline whether or not to publish the computed motion plans on DISPLAY_PATH_TOPIC.
