@@ -54,7 +54,7 @@ void move_group::MoveGroupCartesianPathService::initialize(std::shared_ptr<rclcp
   cartesian_path_service_ = node_->create_service<moveit_msgs::srv::GetCartesianPath>(
         CARTESIAN_PATH_SERVICE_NAME, std::bind(&MoveGroupCartesianPathService::computeService, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3) );
 
-  display_path_ = node_->create_publisher<moveit_msgs::msg::DisplayTrajectory>(planning_pipeline::PlanningPipeline::DISPLAY_PATH_TOPIC);
+  display_path_ = node_->create_publisher<moveit_msgs::msg::DisplayTrajectory>(planning_pipeline::PlanningPipeline::DISPLAY_PATH_TOPIC, 10);
 }
 
 namespace

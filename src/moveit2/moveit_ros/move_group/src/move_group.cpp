@@ -201,7 +201,7 @@ int main(int argc, char** argv)
   std::shared_ptr<tf2_ros::Buffer> tf_buffer = std::make_shared<tf2_ros::Buffer>(clock);
   std::shared_ptr<tf2_ros::TransformListener> tfl = std::make_shared<tf2_ros::TransformListener>(*tf_buffer);
   planning_scene_monitor::PlanningSceneMonitorPtr planning_scene_monitor(
-      new planning_scene_monitor::PlanningSceneMonitor(ROBOT_DESCRIPTION, node, tf_buffer));
+      new planning_scene_monitor::PlanningSceneMonitor(node, ROBOT_DESCRIPTION, tf_buffer));
 
   if (planning_scene_monitor->getPlanningScene())
   {

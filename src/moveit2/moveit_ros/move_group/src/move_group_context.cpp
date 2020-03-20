@@ -49,14 +49,14 @@ move_group::MoveGroupContext::MoveGroupContext(
   , allow_trajectory_execution_(allow_trajectory_execution)
   , debug_(debug)
 {
-  planning_pipeline_.reset(new planning_pipeline::PlanningPipeline(planning_scene_monitor_->getRobotModel(), node));
+  planning_pipeline_.reset(new planning_pipeline::PlanningPipeline(planning_scene_monitor_->getRobotModel(), node, ""));
 
   if (allow_trajectory_execution_)
   {
     trajectory_execution_manager_.reset(new trajectory_execution_manager::TrajectoryExecutionManager(
-        planning_scene_monitor_->getRobotModel(), planning_scene_monitor_->getStateMonitor(), node));
-    plan_execution_.reset(new plan_execution::PlanExecution(planning_scene_monitor_, trajectory_execution_manager_, node));
-    plan_with_sensing_.reset(new plan_execution::PlanWithSensing(trajectory_execution_manager_, node));
+        node, planning_scene_monitor_->getRobotModel(), planning_scene_monitor_->getStateMonitor()));
+    plan_execution_.reset(new plan_execution::PlanExecution(node, planning_scene_monitor_, trajectory_execution_manager_));
+    plan_with_sensing_.reset(new plan_execution::PlanWithSensing(node, trajectory_execution_manager_));
     if (debug)
       plan_with_sensing_->displayCostSources(true);
   }

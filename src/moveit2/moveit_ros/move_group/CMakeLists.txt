@@ -132,7 +132,7 @@ pluginlib_export_plugin_description_file(moveit_ros_move_group default_capabilit
 
 ament_export_include_directories(include ${EIGEN3_INCLUDE_DIR})
 
-ament_export_libraries(moveit_move_group_capabilities_base)
+# ament_export_libraries(moveit_move_group_capabilities_base)
 ament_export_dependencies(moveit_core)
 ament_export_dependencies(moveit_ros_planning)
 ament_export_dependencies(tf2_geometry_msgs)
