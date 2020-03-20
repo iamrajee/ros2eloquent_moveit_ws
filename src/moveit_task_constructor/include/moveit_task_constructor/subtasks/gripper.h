@@ -5,7 +5,7 @@
 #include <moveit_task_constructor/subtask.h>
 
 namespace moveit::planning_interface {
-MOVEIT_CLASS_FORWARD(MoveGroupInterface);
+	MOVEIT_CLASS_FORWARD(MoveGroupInterface);
 }
 
 namespace moveit::task_constructor::subtasks {

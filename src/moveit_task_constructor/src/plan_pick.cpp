@@ -13,14 +13,14 @@ int main(int argc, char** argv){
 	Task t;
 
 	t.addStart( std::make_shared<subtasks::CurrentState>("current state") );
-/*
+
 	{
 		auto move= std::make_shared<subtasks::Gripper>("open gripper");
 		move->setGroup("gripper");
 		move->setTo("open");
 		t.addAfter(move);
 	}
-
+/*
 	{
 		auto move= std::make_shared<subtasks::Move>("move to pre-grasp");
 		move->setGroup("arm");

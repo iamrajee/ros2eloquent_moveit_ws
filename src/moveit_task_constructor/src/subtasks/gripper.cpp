@@ -3,7 +3,7 @@
 #include <moveit/planning_scene/planning_scene.h>
 #include <moveit/robot_state/conversions.h>
 
-// #include <moveit/move_group_interface/move_group_interface.h>
+#include <moveit/move_group_interface/move_group_interface.h>
 #include <moveit/moveit_cpp/moveit_cpp.h>
 
 moveit::task_constructor::subtasks::Gripper::Gripper(std::string name)
@@ -16,7 +16,7 @@ moveit::task_constructor::subtasks::Gripper::setGroup(std::string group){
 	// mgi_.reset(new moveit::planning_interface::MoveGroupInterface(group));
     // mgi_.reset(new moveit::planning_interface::MoveItCpp(group));
 }
-/*
+
 void
 moveit::task_constructor::subtasks::Gripper::setFrom(std::string named_target){
 	from_named_target_= named_target;
@@ -36,10 +36,11 @@ bool
 moveit::task_constructor::subtasks::Gripper::compute(){
 	InterfaceState& start= fetchStateBeginning();
 
-	moveit_msgs::RobotState state;
+	moveit_msgs::msg::RobotState state;
 	moveit::core::robotStateToRobotStateMsg(start.state->getCurrentState(), state);
-	mgi_->setStartState(state);
-
+	
+	// mgi_->setStartState(state);
+	/*
 	mgi_->setNamedTarget(to_named_target_);
 
 	moveit::planning_interface::MoveGroupInterface::Plan plan;
@@ -63,8 +64,7 @@ moveit::task_constructor::subtasks::Gripper::compute(){
 	moveit::task_constructor::SubTrajectory& trajectory= addTrajectory(traj);
 	trajectory.connectToBeginning(start);
 	sendForward(trajectory, end_scene);
-
+	*/
 	return true;
 }
 
-*/

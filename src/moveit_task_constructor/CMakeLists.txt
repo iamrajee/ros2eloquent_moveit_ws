@@ -5,19 +5,22 @@ if(NOT CMAKE_CXX_STANDARD)
   set(CMAKE_CXX_STANDARD 14)
 endif()
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra) # flag -Wpedantic generate nested namespace warning
-endif()
+# if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+#   add_compile_options(-Wall) # flag -Wextra)  -Wpedantic generate nested namespace warning
+# endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(moveit_ros_planning REQUIRED) #important call it seperately
+find_package(moveit_ros_move_group REQUIRED)
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
 # find_package(rclcpp REQUIRED)
 find_package(rcutils REQUIRED)
+
+find_package(Boost COMPONENTS system filesystem REQUIRED) # !!! important add COMPONENTS ...etc to remove "unreference to" error
 find_package(moveit_core REQUIRED COMPONENTS
-  Boost 
+  # Boost 
   moveit_core
   moveit_msgs
   rosidl_default_runtime
@@ -35,6 +38,7 @@ include_directories(
   ${moveit_ros_planning_interface_INCLUDE_DIRS}
   ${moveit_msgs_INCLUDE_DIRS}
   ${rcutils_INCLUDE_DIRS}
+  ${moveit_ros_move_group_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}_subtasks
@@ -53,6 +57,12 @@ set(dep_list
   "moveit_msgs"
   "moveit_ros_planning"
   "moveit_ros_planning_interface"
+  "Boost"
+  "rosidl_default_runtime"
+  "moveit_core"
+  "ament_cmake"
+  "rcutils"
+  "moveit_ros_move_group"
 )
 ament_target_dependencies(${PROJECT_NAME}_subtasks ${dep_list})
 ament_target_dependencies(${PROJECT_NAME} ${dep_list}) #!!! important both rclcpp and moveit_msgs
