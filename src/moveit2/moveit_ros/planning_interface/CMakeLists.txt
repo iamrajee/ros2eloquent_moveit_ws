@@ -13,7 +13,7 @@ find_package(moveit_msgs REQUIRED)
 find_package(moveit_ros_planning REQUIRED)
 # find_package(moveit_ros_warehouse REQUIRED)
 # find_package(moveit_ros_manipulation REQUIRED)
-# find_package(moveit_ros_move_group REQUIRED)
+find_package(moveit_ros_move_group REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_eigen REQUIRED)
@@ -48,14 +48,14 @@ set(THIS_PACKAGE_INCLUDE_DIRS
 #  py_bindings_tools/include
   common_planning_interface_objects/include
 #  planning_scene_interface/include
-#  move_group_interface/include
+  move_group_interface/include
   moveit_cpp/include
 )
 
 set(THIS_PACKAGE_LIBRARIES
   moveit_common_planning_interface_objects
 #  moveit_planning_scene_interface
-#  moveit_move_group_interface
+  move_group_interface
   moveit_cpp
 )
 
@@ -65,7 +65,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   moveit_ros_planning
 #  moveit_ros_warehouse
 #  moveit_ros_manipulation
-#  moveit_ros_move_group
+  moveit_ros_move_group
   tf2
   tf2_eigen
   tf2_geometry_msgs
@@ -81,7 +81,7 @@ include_directories(${THIS_PACKAGE_INCLUDE_DIRS})
 # add_subdirectory(py_bindings_tools)
 add_subdirectory(common_planning_interface_objects)
 # add_subdirectory(planning_scene_interface)
-# add_subdirectory(move_group_interface)
+add_subdirectory(move_group_interface)
 # add_subdirectory(robot_interface)
 # add_subdirectory(test)
 add_subdirectory(moveit_cpp)
