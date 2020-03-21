@@ -1,4 +1,18 @@
-/usr/bin/expect -c 'spawn git add .; interact'
-/usr/bin/expect -c 'spawn git commit -m ${1:-updated}"; interact'
-/usr/bin/expect -c 'spawn git push origin master; expect "Username:"; send "iamrajee\n"; expect "password:"; send "Raj@114232340\n"; interact'
-clear
+#!/usr/bin/expect -f
+
+set A [lindex $argv 0]
+set B [lindex $argv 1]
+
+proc parseArgv {{A_ "updated"} {B_ "."}} {
+	variable ::A $A_
+	variable ::B $B_
+}
+parseArgv {*}$argv
+
+spawn echo $A; interact
+spawn echo $B; interact
+
+spawn git add $B; interact
+spawn git commit -m $A; interact
+spawn git push origin master; expect "Username:"; send "iamrajee\n"; expect "password:"; send "Raj@114232340\n"; interact
+#clear
