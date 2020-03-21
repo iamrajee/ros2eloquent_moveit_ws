@@ -55,7 +55,7 @@ set(THIS_PACKAGE_INCLUDE_DIRS
 set(THIS_PACKAGE_LIBRARIES
   moveit_common_planning_interface_objects
 #  moveit_planning_scene_interface
-  move_group_interface
+  # moveit_move_group_interface            #<======================= ?? error
   moveit_cpp
 )
 
@@ -74,9 +74,19 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   rclcpp_action
   Eigen3
   Boost
+  # moveit_move_group_interface     # wrong error 
+  # moveit_cpp                      # wrong error
 )
 
-include_directories(${THIS_PACKAGE_INCLUDE_DIRS})
+include_directories(
+                    include                                              #!!! import added new ??
+                    ${THIS_PACKAGE_INCLUDE_DIRS}
+                    ${Boost_INCLUDE_DIRS}                                #added new
+                    ${moveit_ros_planning_INCLUDE_DIRS}                 #added new
+                    ${moveit_ros_move_group_INCLUDE_DIRS}                 #added new
+                    ${ament_cmake_INCLUDE_DIRS})                        #added new
+                    # ${moveit_move_group_interface_INCLUDE_DIRS}      #wrong doesn't effect
+                    # moveit_move_group_interface/include)            #wrong doesn't effect
 
 # add_subdirectory(py_bindings_tools)
 add_subdirectory(common_planning_interface_objects)
@@ -87,7 +97,16 @@ add_subdirectory(move_group_interface)
 add_subdirectory(moveit_cpp)
 
 ament_export_include_directories(include)
+# ament_export_include_directories(${THIS_PACKAGE_INCLUDE_DIRS})
+# ament_export_include_directories(moveit_cpp/include)
+# ament_export_include_directories(common_planning_interface_objects/include)
+# move_group_interface/include
 ament_export_libraries(${THIS_PACKAGE_LIBRARIES})
+# ament_export_libraries(moveit_cpp)                                        #no errror here
+# ament_export_libraries(move_group_interface)                            #but why error here
+# ament_export_libraries(moveit_move_group_interface)                     #but why error here
+# ament_export_libraries(${moveit_move_group_interface_LIBRARIES})        #wrong no effect
+# ament_export_libraries(${MOVEIT_LIB_NAME})                              #wrong no effect
 ament_export_dependencies(${THIS_PACKAGE_INCLUDE_DEPENDS})
 
 ament_package()

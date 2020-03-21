@@ -29,7 +29,9 @@ target_link_libraries(${MOVEIT_LIB_NAME}
 
 install(TARGETS ${MOVEIT_LIB_NAME}
   ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib)
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION bin
+)
 
 #TODO(anasarrak): re-enable when starting with python_move_group
 # install(TARGETS ${MOVEIT_LIB_NAME}_python
@@ -37,6 +39,8 @@ install(TARGETS ${MOVEIT_LIB_NAME}
 #   LIBRARY DESTINATION lib)
 
 install(DIRECTORY include/ DESTINATION include)
+
+ament_export_libraries(${MOVEIT_LIB_NAME}) #added new
 
 add_executable(demo_move_group_interface src/demo.cpp)
 ament_target_dependencies(demo_move_group_interface
