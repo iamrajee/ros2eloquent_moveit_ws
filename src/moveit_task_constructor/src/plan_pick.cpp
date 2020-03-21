@@ -3,6 +3,7 @@
 
 #include <moveit_task_constructor/subtasks/current_state.h>
 #include <moveit_task_constructor/subtasks/gripper.h>
+#include <moveit/move_group_interface/move_group_interface.h>
 
 using namespace moveit::task_constructor;
 

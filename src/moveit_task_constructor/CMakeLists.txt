@@ -13,6 +13,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(moveit_ros_planning REQUIRED) #important call it seperately
 find_package(moveit_ros_move_group REQUIRED)
+# find_package(moveit_ros_move_group_interface REQUIRED) #wrong 
 find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
 # find_package(rclcpp REQUIRED)
@@ -20,11 +21,7 @@ find_package(rcutils REQUIRED)
 
 find_package(Boost COMPONENTS system filesystem REQUIRED) # !!! important add COMPONENTS ...etc to remove "unreference to" error
 find_package(moveit_core REQUIRED COMPONENTS
-  # Boost 
-  moveit_core
-  moveit_msgs
   rosidl_default_runtime
-  # rcutils
 )
 
 include_directories(
@@ -36,7 +33,6 @@ include_directories(
   ${moveit_msgs_INCLUDE_DIRS}
   ${moveit_ros_planning_INCLUDE_DIRS} #important
   ${moveit_ros_planning_interface_INCLUDE_DIRS}
-  ${moveit_msgs_INCLUDE_DIRS}
   ${rcutils_INCLUDE_DIRS}
   ${moveit_ros_move_group_INCLUDE_DIRS}
 )
@@ -64,6 +60,11 @@ set(dep_list
   "rcutils"
   "moveit_ros_move_group"
 )
+
+set(THIS_PACKAGE_INCLUDE_LIBRARIES                #added new
+  moveit_ros_planning_interface
+)
+
 ament_target_dependencies(${PROJECT_NAME}_subtasks ${dep_list})
 ament_target_dependencies(${PROJECT_NAME} ${dep_list}) #!!! important both rclcpp and moveit_msgs
 
@@ -98,6 +99,10 @@ install(TARGETS cpp_node test_plan_current_state plan_pick test_plan_gripper
 #   RUNTIME DESTINATION bin)
 
 ament_export_include_directories(include)
+ament_export_libraries(${PROJECT_NAME})                                   #added new
+ament_export_libraries(${PROJECT_NAME}_subtasks)                        #added new
+ament_export_libraries(${THIS_PACKAGE_INCLUDE_LIBRARIES})                  #added new
+ament_export_dependencies(${dep_list})                                  #added new
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

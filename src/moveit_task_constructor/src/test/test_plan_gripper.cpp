@@ -18,21 +18,21 @@ int main(int argc, char** argv){
     
 	t.addStart( std::make_shared<subtasks::CurrentState>("current state") );
 
-	{
-		auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
-		gripper->setGroup("gripper");
-		gripper->setTo("closed");
-		t.addAfter( gripper );
-	}
+	// {
+	// 	auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
+	// 	gripper->setGroup("gripper");
+	// 	gripper->setTo("closed");
+	// 	t.addAfter( gripper );
+	// }
 	
-	t.plan();
+	// t.plan();
 	
-	{
-		auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
-		gripper->setGroup("gripper");
-		gripper->setTo("closed");
-		t.addStart( gripper );
-	}
+	// {
+	// 	auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
+	// 	gripper->setGroup("gripper");
+	// 	gripper->setTo("closed");
+	// 	t.addStart( gripper );
+	// }
 
 	t.addAfter( std::make_shared<subtasks::CurrentState>("current state") );
 
