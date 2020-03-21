@@ -13,4 +13,5 @@ spawn git add $B; interact
 spawn git commit -m $A; interact
 spawn git push origin master; expect "Username:"; send "iamrajee\n"; expect "password:"; send "Raj@114232340\n"; interact
 # exec clear
-puts \033\[2J
+# puts \033\[2J
+puts -nonewline \033\[2J
