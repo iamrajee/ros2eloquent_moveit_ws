@@ -52,7 +52,7 @@ int main(int argc, char** argv){
 
 	t.printState();
 
-	rclcpp::spin(node);
+	// rclcpp::spin(node);
 
 	return 0;
 }
