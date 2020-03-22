@@ -11,7 +11,7 @@ moveit::task_constructor::Task::Task(){
 	if( !rml_->getModel() )	
 	throw Exception("Task failed to construct RobotModel");
 
-	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_client");
+	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("get_planning_scene_node");
 	rclcpp::Client<moveit_msgs::srv::GetPlanningScene>::SharedPtr client = node->create_client<moveit_msgs::srv::GetPlanningScene>("get_planning_scene");
 	client->wait_for_service(); //client.waitForExistence();
 

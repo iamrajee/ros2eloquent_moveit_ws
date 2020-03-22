@@ -18,6 +18,8 @@ find_package(moveit_ros_planning_interface REQUIRED)
 find_package(moveit_msgs REQUIRED)
 # find_package(rclcpp REQUIRED)
 find_package(rcutils REQUIRED)
+# find_package(eigen_conversions REQUIRED)
+find_package(shape_msgs REQUIRED)
 
 find_package(Boost COMPONENTS system filesystem REQUIRED) # !!! important add COMPONENTS ...etc to remove "unreference to" error
 find_package(moveit_core REQUIRED COMPONENTS
@@ -35,12 +37,15 @@ include_directories(
   ${moveit_ros_planning_interface_INCLUDE_DIRS}
   ${rcutils_INCLUDE_DIRS}
   ${moveit_ros_move_group_INCLUDE_DIRS}
+  ${shape_msgs_INCLUDE_DIRS}
+#  ${eigen_conversions_INCLUDE_DIRS}
 )
 
 add_library(${PROJECT_NAME}_subtasks
   src/subtasks/move.cpp
   src/subtasks/current_state.cpp
   src/subtasks/gripper.cpp
+  src/subtasks/generate_grasp_pose.cpp
 )
 
 add_library(${PROJECT_NAME}
@@ -59,6 +64,8 @@ set(dep_list
   "ament_cmake"
   "rcutils"
   "moveit_ros_move_group"
+#  "eigen_conversions"
+  "shape_msgs"
 )
 
 set(THIS_PACKAGE_INCLUDE_LIBRARIES                #added new
@@ -82,6 +89,10 @@ add_executable(test_plan_gripper src/test/test_plan_gripper.cpp)
 ament_target_dependencies(test_plan_gripper ${dep_list})
 target_link_libraries(test_plan_gripper ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
 
+add_executable(test_plan_generate_grasp_pose src/test/test_plan_generate_grasp_pose.cpp)
+ament_target_dependencies(test_plan_generate_grasp_pose ${dep_list})
+target_link_libraries(test_plan_generate_grasp_pose ${PROJECT_NAME}_subtasks ${PROJECT_NAME})
+
 
 
 add_executable(cpp_node src/cpp_node.cpp)
@@ -89,7 +100,7 @@ target_include_directories(cpp_node PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>)
 
-install(TARGETS cpp_node test_plan_current_state plan_pick test_plan_gripper
+install(TARGETS cpp_node test_plan_current_state plan_pick test_plan_gripper test_plan_generate_grasp_pose
   EXPORT export_${PROJECT_NAME}
   DESTINATION lib/${PROJECT_NAME})
 
