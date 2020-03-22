@@ -65,15 +65,16 @@ moveit::task_constructor::subtasks::GenerateGraspPose::canCompute(){
 
 namespace {
 	bool isValid(planning_scene::PlanningSceneConstPtr scene,
-	        std::vector< std::vector<double> >& old_solutions,
+	        std::vector< std::vector<double> >* old_solutions,
 	        robot_state::RobotState* state,
 	        const robot_model::JointModelGroup* jmg,
 	        const double* joint_positions){
-		for( std::vector<double> sol : old_solutions ){
+		for( std::vector<double> sol : *old_solutions ){
 			if( jmg->distance(joint_positions, sol.data()) < 0.1 ){
 				return false;
 			}
 		}
+
 		state->setJointGroupPositions(jmg, joint_positions);
 		state->update();
 		return scene->isStateColliding(*state, jmg->getName());
@@ -94,7 +95,7 @@ moveit::task_constructor::subtasks::GenerateGraspPose::compute(){
 		std::bind(
 			&isValid,
 			scene_,
-			previous_solutions_,
+			&previous_solutions_,
 			std::placeholders::_1,
 			std::placeholders::_2,
 			std::placeholders::_3);
