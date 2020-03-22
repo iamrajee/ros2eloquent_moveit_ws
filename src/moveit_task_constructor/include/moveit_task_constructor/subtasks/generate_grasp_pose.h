@@ -45,6 +45,10 @@ protected:
 
 	double remaining_time_;
 
+	bool tried_current_state_as_seed_;
+
+	std::vector< std::vector<double> > previous_solutions_;
+
 	rclcpp::Publisher<moveit_msgs::msg::DisplayRobotState>::SharedPtr pub; //ros::Publisher pub;
 	
 	
