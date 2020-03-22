@@ -29,6 +29,8 @@ public:
 
 	void setObject(std::string object);
 
+	void setGraspOffset(double grasp_offset);
+
 	void setTimeout(double timeout);
 
 	void setAngleDelta(double delta);
@@ -37,6 +39,8 @@ protected:
 	std::string group_;
 
 	std::string eef_;
+
+	double grasp_offset_;
 
 	std::string object_;
 
