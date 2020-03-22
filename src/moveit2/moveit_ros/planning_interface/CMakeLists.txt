@@ -47,7 +47,7 @@ find_package(Eigen3 REQUIRED)
 set(THIS_PACKAGE_INCLUDE_DIRS
 #  py_bindings_tools/include
   common_planning_interface_objects/include
-#  planning_scene_interface/include
+  planning_scene_interface/include
   move_group_interface/include
   # moveit_move_group_interface/include
   moveit_cpp/include
@@ -55,7 +55,7 @@ set(THIS_PACKAGE_INCLUDE_DIRS
 
 set(THIS_PACKAGE_LIBRARIES
   moveit_common_planning_interface_objects
-#  moveit_planning_scene_interface
+  moveit_planning_scene_interface
   moveit_move_group_interface
   moveit_cpp
 )
@@ -88,7 +88,7 @@ include_directories(
 
 # add_subdirectory(py_bindings_tools)
 add_subdirectory(common_planning_interface_objects)
-# add_subdirectory(planning_scene_interface)
+add_subdirectory(planning_scene_interface)
 add_subdirectory(move_group_interface)
 # add_subdirectory(robot_interface)
 # add_subdirectory(test)
