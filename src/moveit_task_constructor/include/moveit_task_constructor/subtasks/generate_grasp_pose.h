@@ -31,6 +31,8 @@ public:
 
 	void setTimeout(double timeout);
 
+	void setAngleDelta(double delta);
+
 protected:
 	std::string group_;
 
@@ -39,6 +41,8 @@ protected:
 	std::string object_;
 
 	double timeout_;
+
+	double angle_delta_;
 
    /* temp values */
 	double current_angle_;
