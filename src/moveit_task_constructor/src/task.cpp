@@ -3,6 +3,7 @@
 #include <moveit/robot_model_loader/robot_model_loader.h> 
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/client.hpp>
+#include <rcl/rcl.h>
 
 #include <moveit_msgs/srv/get_planning_scene.hpp>
 
@@ -55,10 +56,16 @@ void moveit::task_constructor::Task::addAfter( SubTaskPtr subtask ){
 }
 
 bool moveit::task_constructor::Task::plan(){
-	for( SubTaskPtr& subtask : subtasks_ ){
-		std::cout << "Computing subtask '" << subtask->getName() << "': " << std::endl;
-		bool success= subtask->compute();
-		std::cout << (success ? "succeeded" : "failed") << std::endl;
+	while(rclcpp::ok()){
+		for( SubTaskPtr& subtask : subtasks_ ){
+			if( !subtask->canCompute() )
+				continue;
+			std::cout << "Computing subtask '" << subtask->getName() << "': " << std::endl;
+			bool success= subtask->compute();
+			std::cout << (success ? "succeeded" : "failed") << std::endl;
+		}
+		printState();
+		rclcpp::WallRate(2).sleep(); // rclcpp::Duration(0.5).sleep();        //<=============== ???
 	}
 	return false;
 }

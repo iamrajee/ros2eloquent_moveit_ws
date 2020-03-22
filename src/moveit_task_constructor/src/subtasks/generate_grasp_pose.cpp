@@ -21,9 +21,9 @@ moveit::task_constructor::subtasks::GenerateGraspPose::GenerateGraspPose(std::st
 	// pub= nh.advertise<moveit_msgs::DisplayRobotState>("display_robot_state", 50);
 	// ros::Duration(1.0).sleep();
 
-	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared(""); //"display_robot_state_node"	
+	std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared(""); //"display_robot_state_node"
 	pub=node->create_publisher<moveit_msgs::msg::DisplayRobotState>("display_robot_state", 50);
-	sleep(1.0); //rclcpp::Duration(1.0);.sleep();
+	rclcpp::WallRate(1.0).sleep(); //sleep(1.0); //rclcpp::Duration(1.0).sleep();    //<=============== ???
 }
 
 void

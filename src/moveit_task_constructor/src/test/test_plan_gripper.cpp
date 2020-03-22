@@ -39,6 +39,6 @@ int main(int argc, char** argv){
 	t.printState();
 
 	rclcpp::spin(node);
-	rclcpp::shutdown();
+	// rclcpp::shutdown();
 	return 0;
 }
