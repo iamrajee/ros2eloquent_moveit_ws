@@ -4,7 +4,6 @@
 #include <moveit/robot_state/conversions.h>
 
 #include <moveit/move_group_interface/move_group_interface.h>
-// #include <moveit/moveit_cpp/moveit_cpp.h>
 
 moveit::task_constructor::subtasks::Gripper::Gripper(std::string name)
 : moveit::task_constructor::SubTask::SubTask(name)
@@ -39,7 +38,6 @@ moveit::task_constructor::subtasks::Gripper::compute(){
 	moveit::core::robotStateToRobotStateMsg(start.state->getCurrentState(), state);
 	
 	mgi_->setStartState(state);
-	// /*
 	mgi_->setNamedTarget(to_named_target_);
 
 	moveit::planning_interface::MoveGroupInterface::Plan plan;
@@ -63,7 +61,6 @@ moveit::task_constructor::subtasks::Gripper::compute(){
 	moveit::task_constructor::SubTrajectory& trajectory= addTrajectory(traj);
 	trajectory.connectToBeginning(start);
 	sendForward(trajectory, end_scene);
-	// */
 	return true;
 }
 

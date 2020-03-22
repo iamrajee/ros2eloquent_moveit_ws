@@ -2,11 +2,12 @@
 #include <moveit_task_constructor/subtask.h>
 #include <moveit/robot_model_loader/robot_model_loader.h> 
 #include <rclcpp/rclcpp.hpp>
+#include <rclcpp/client.hpp>
 
 #include <moveit_msgs/srv/get_planning_scene.hpp>
 
 moveit::task_constructor::Task::Task(){
-	// rml_.reset(new robot_model_loader::RobotModelLoader); //error
+	rml_.reset(); // rml_.reset(new robot_model_loader::RobotModelLoader);
 	if( !rml_->getModel() )	
 	throw Exception("Task failed to construct RobotModel");
 
@@ -14,7 +15,7 @@ moveit::task_constructor::Task::Task(){
 	rclcpp::Client<moveit_msgs::srv::GetPlanningScene>::SharedPtr client = node->create_client<moveit_msgs::srv::GetPlanningScene>("get_planning_scene");
 	client->wait_for_service(); //client.waitForExistence();
 
-	moveit_msgs::srv::GetPlanningScene::Request req;
+	moveit_msgs::srv::GetPlanningScene::Request req; //std::shared_ptr<moveit_msgs::srv::GetPlanningScene::Request> req = std::make_shared<moveit_msgs::srv::GetPlanningScene::Request> ();
 	moveit_msgs::srv::GetPlanningScene::Response res;
 	
 	req.components.components =

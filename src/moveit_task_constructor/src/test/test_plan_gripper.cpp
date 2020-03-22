@@ -8,7 +8,7 @@
 using namespace moveit::task_constructor;
 
 int main(int argc, char** argv){
-    rclcpp::init(argc, argv); // rclcpp::init(argc, argv, "test_plan_gripper");
+    rclcpp::init(argc, argv);
     std::shared_ptr<rclcpp::Node> node = rclcpp::Node::make_shared("test_plan_gripper");
     
 	// rclcpp::AsyncSpinner spinner(1); //error
@@ -18,25 +18,25 @@ int main(int argc, char** argv){
     
 	t.addStart( std::make_shared<subtasks::CurrentState>("current state") );
 
-	// {
-	// 	auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
-	// 	gripper->setGroup("gripper");
-	// 	gripper->setTo("closed");
-	// 	t.addAfter( gripper );
-	// }
+	{
+		auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
+		gripper->setGroup("gripper");
+		gripper->setTo("closed");
+		t.addAfter( gripper );
+	}
 	
-	// t.plan();
+	t.plan();
 	
-	// {
-	// 	auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
-	// 	gripper->setGroup("gripper");
-	// 	gripper->setTo("closed");
-	// 	t.addStart( gripper );
-	// }
+	{
+		auto gripper= std::make_shared<subtasks::Gripper>("close gripper");
+		gripper->setGroup("gripper");
+		gripper->setTo("closed");
+		t.addStart( gripper );
+	}
 
 	t.addAfter( std::make_shared<subtasks::CurrentState>("current state") );
 
-	// t.printState();
+	t.printState();
 
 	rclcpp::spin(node);
 	rclcpp::shutdown();
