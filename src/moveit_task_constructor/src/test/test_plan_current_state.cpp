@@ -6,7 +6,7 @@
 #include <memory>
 
 #include <moveit_task_constructor/task.h>
-// #include <moveit_task_constructor/subtask.h>
+#include <moveit_task_constructor/subtask.h>
 
 #include <moveit_task_constructor/subtasks/current_state.h>
 
