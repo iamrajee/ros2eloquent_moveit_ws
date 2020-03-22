@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+set v 1
+read vr
+spawn echo $v; interact
+#spawn echo ${2:-this is default sentence}; interact
+# v=1
+#set v 5
+#/usr/bin/expect -f 'spawn echo hello; interact'
+#/usr/bin/expect -c 'spawn git add .; interact'
+#/usr/bin/expect -c 'spawn git commit -m "dfg"; interact'
+#/usr/bin/expect -c 'spawn git push origin master; expect "Username:"; send "iamrajee\n"; expect "password:"; send "Raj@114232340\n"; interact'
+#clear
