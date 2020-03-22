@@ -56,12 +56,15 @@ void moveit::task_constructor::Task::addAfter( SubTaskPtr subtask ){
 }
 
 bool moveit::task_constructor::Task::plan(){
-	while(rclcpp::ok()){
+	bool computed= true;
+	while(rclcpp::ok() && computed){
+		computed= false;
 		for( SubTaskPtr& subtask : subtasks_ ){
 			if( !subtask->canCompute() )
 				continue;
 			std::cout << "Computing subtask '" << subtask->getName() << "': " << std::endl;
 			bool success= subtask->compute();
+			computed= true;
 			std::cout << (success ? "succeeded" : "failed") << std::endl;
 		}
 		printState();
