@@ -1498,7 +1498,7 @@ moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const std::st
 
 moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const Options& opt,
                                                                    const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
-                                                                   const std::chrono::duration<double>& wait_for_servers)
+                                                                   const std::chrono::duration<double>& wait_for_servers) 
 {
   impl_ = new MoveGroupInterfaceImpl(opt, tf_buffer ? tf_buffer : getSharedTF(), wait_for_servers);
 }
@@ -1514,27 +1514,27 @@ moveit::planning_interface::MoveGroupInterface::~MoveGroupInterface()
 {
   delete impl_;
 }
-//
-// moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(MoveGroupInterface&& other)
-//   : remembered_joint_values_(std::move(other.remembered_joint_values_)), impl_(other.impl_)
-// {
-//   other.impl_ = nullptr;
-// }
-//
-// moveit::planning_interface::MoveGroupInterface& moveit::planning_interface::MoveGroupInterface::
-// operator=(MoveGroupInterface&& other)
-// {
-//   if (this != &other)
-//   {
-//     delete impl_;
-//     impl_ = other.impl_;
-//     remembered_joint_values_ = std::move(other.remembered_joint_values_);
-//     other.impl_ = nullptr;
-//   }
-//
-//   return *this;
-// }
-//
+
+moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(MoveGroupInterface&& other)  //changed uncommented
+  : remembered_joint_values_(std::move(other.remembered_joint_values_)), impl_(other.impl_)
+{
+  other.impl_ = nullptr;
+}
+
+moveit::planning_interface::MoveGroupInterface& moveit::planning_interface::MoveGroupInterface::  //changed uncommented
+operator=(MoveGroupInterface&& other)
+{
+  if (this != &other)
+  {
+    delete impl_;
+    impl_ = other.impl_;
+    remembered_joint_values_ = std::move(other.remembered_joint_values_);
+    other.impl_ = nullptr;
+  }
+
+  return *this;
+}
+
 const std::string& moveit::planning_interface::MoveGroupInterface::getName() const
 {
   return impl_->getOptions().group_name_;
@@ -1734,19 +1734,19 @@ void moveit::planning_interface::MoveGroupInterface::stop()
   impl_->stop();
 }
 
-// void moveit::planning_interface::MoveGroupInterface::setStartState(const moveit_msgs::msg::RobotState& start_state)
-// {
-//   robot_state::RobotStatePtr rs;
-//   impl_->getCurrentState(rs);
-//   robot_state::robotStateMsgToRobotState(start_state, *rs);
-//   setStartState(*rs);
-// }
-//
-// void moveit::planning_interface::MoveGroupInterface::setStartState(const robot_state::RobotState& start_state)
-// {
-//   impl_->setStartState(start_state);
-// }
-//
+void moveit::planning_interface::MoveGroupInterface::setStartState(const moveit_msgs::msg::RobotState& start_state) //changed uncommented
+{
+  robot_state::RobotStatePtr rs;
+  impl_->getCurrentState(rs);
+  robot_state::robotStateMsgToRobotState(start_state, *rs);
+  setStartState(*rs);
+}
+
+void moveit::planning_interface::MoveGroupInterface::setStartState(const robot_state::RobotState& start_state) //changed uncommented
+{
+  impl_->setStartState(start_state);
+}
+
 // void moveit::planning_interface::MoveGroupInterface::setStartStateToCurrentState()
 // {
 //   impl_->setStartStateToCurrentState();
@@ -1789,25 +1789,26 @@ void moveit::planning_interface::MoveGroupInterface::stop()
 //   return positions;
 // }
 //
-// bool moveit::planning_interface::MoveGroupInterface::setNamedTarget(const std::string& name)
-// {
-//   std::map<std::string, std::vector<double> >::const_iterator it = remembered_joint_values_.find(name);
-//   if (it != remembered_joint_values_.end())
-//   {
-//     return setJointValueTarget(it->second);
-//   }
-//   else
-//   {
-//     if (impl_->getJointStateTarget().setToDefaultValues(impl_->getJointModelGroup(), name))
-//     {
-//       impl_->setTargetType(JOINT);
-//       return true;
-//     }
-//     ROS_ERROR_NAMED("move_group_interface", "The requested named target '%s' does not exist", name.c_str());
-//     return false;
-//   }
-// }
-//
+bool moveit::planning_interface::MoveGroupInterface::setNamedTarget(const std::string& name)   //changed uncommented
+{
+  std::map<std::string, std::vector<double> >::const_iterator it = remembered_joint_values_.find(name);
+  if (it != remembered_joint_values_.end())
+  {
+    return setJointValueTarget(it->second);
+  }
+  else
+  {
+    if (impl_->getJointStateTarget().setToDefaultValues(impl_->getJointModelGroup(), name))
+    {
+      impl_->setTargetType(JOINT);
+      return true;
+    }
+    // ROS_ERROR_NAMED("move_group_interface", "The requested named target '%s' does not exist", name.c_str());
+    RCLCPP_ERROR(LOGGER_MOVE_GROUP_INTERFACE, "The requested named target '%s' does not exist", name.c_str());
+    return false;
+  }
+}
+
 bool moveit::planning_interface::MoveGroupInterface::setJointValueTarget(const std::vector<double>& joint_values)
 {
   if (joint_values.size() != impl_->getJointModelGroup()->getVariableCount())

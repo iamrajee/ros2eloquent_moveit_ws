@@ -40,7 +40,7 @@ install(TARGETS ${MOVEIT_LIB_NAME}
 
 install(DIRECTORY include/ DESTINATION include)
 
-ament_export_libraries(${MOVEIT_LIB_NAME}) #added new
+ament_export_libraries(${MOVEIT_LIB_NAME})                  #added new
 
 add_executable(demo_move_group_interface src/demo.cpp)
 ament_target_dependencies(demo_move_group_interface
