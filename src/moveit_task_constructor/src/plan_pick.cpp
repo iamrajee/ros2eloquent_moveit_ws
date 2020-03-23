@@ -71,7 +71,7 @@ int main(int argc, char** argv){
 */
 	t.plan();
 
-	t.printState();
+	// t.printState();
 
 	rclcpp::spin(node);
 	// rclcpp::shutdown();

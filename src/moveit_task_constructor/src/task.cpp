@@ -67,8 +67,10 @@ bool moveit::task_constructor::Task::plan(){
 			computed= true;
 			std::cout << (success ? "succeeded" : "failed") << std::endl;
 		}
-		printState();
-		rclcpp::WallRate(2).sleep(); // rclcpp::Duration(0.5).sleep();        //<=============== ???
+		if(computed){
+			printState();
+			rclcpp::WallRate(2).sleep(); // rclcpp::Duration(0.5).sleep();        //<=============== ???
+		}	
 	}
 	return false;
 }
