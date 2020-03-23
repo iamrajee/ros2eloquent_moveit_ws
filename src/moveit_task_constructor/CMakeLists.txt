@@ -46,6 +46,7 @@ add_library(${PROJECT_NAME}_subtasks
   src/subtasks/current_state.cpp
   src/subtasks/gripper.cpp
   src/subtasks/generate_grasp_pose.cpp
+  src/subtasks/cartesian_position_motion.cpp
 )
 
 add_library(${PROJECT_NAME}
