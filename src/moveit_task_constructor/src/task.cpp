@@ -1,11 +1,13 @@
 #include <moveit_task_constructor/task.h>
 #include <moveit_task_constructor/subtask.h>
-#include <moveit/robot_model_loader/robot_model_loader.h> 
+#include <moveit/robot_model_loader/robot_model_loader.h>
+#include <moveit/planning_pipeline/planning_pipeline.h>
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp/client.hpp>
 #include <rcl/rcl.h>
 
 #include <moveit_msgs/srv/get_planning_scene.hpp>
+
 
 moveit::task_constructor::Task::Task(){
 	rml_.reset(); // rml_.reset(new robot_model_loader::RobotModelLoader);
@@ -37,6 +39,8 @@ moveit::task_constructor::Task::Task(){
 	// client->async_send_request(req); //new
 	scene_.reset(new planning_scene::PlanningScene(rml_->getModel()));
 	scene_->setPlanningSceneMsg(res.scene);
+
+	planner_.reset(new planning_pipeline::PlanningPipeline(rml_->getModel(), rclcpp::Node::make_shared("move_group"),""));
 }
 
 moveit::task_constructor::Task::~Task(){
@@ -77,6 +81,7 @@ bool moveit::task_constructor::Task::plan(){
 
 void moveit::task_constructor::Task::addSubTask( SubTaskPtr subtask ){
 	subtask->setPlanningScene( scene_ );
+	subtask->setPlanningPipeline( planner_ );
 	subtasks_.push_back( subtask );
 }
 
