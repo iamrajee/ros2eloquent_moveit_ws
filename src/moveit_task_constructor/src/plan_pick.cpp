@@ -53,7 +53,7 @@ int main(int argc, char** argv){
 		gengrasp->setAngleDelta(.2);
 		t.addAfter(gengrasp);
 	}
-/*
+
 	{
 		auto move= std::make_shared<subtasks::Gripper>("grasp");
 		move->setGroup("gripper");
@@ -61,7 +61,7 @@ int main(int argc, char** argv){
 		move->graspObject("object");
 		t.addAfter(move);
 	}
-
+/*
 	{
 		auto move= std::make_shared<subtasks::CartesianPositionMotion>("Lift Object");
 		move->setGroup("arm");

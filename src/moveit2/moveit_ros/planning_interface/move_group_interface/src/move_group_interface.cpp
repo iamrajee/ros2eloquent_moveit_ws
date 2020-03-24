@@ -1763,10 +1763,10 @@ void moveit::planning_interface::MoveGroupInterface::setStartState(const robot_s
 //   return impl_->getJointModelGroup()->getVariableNames();
 // }
 //
-// const std::vector<std::string>& moveit::planning_interface::MoveGroupInterface::getLinkNames()
-// {
-//   return impl_->getJointModelGroup()->getLinkModelNames();
-// }
+const std::vector<std::string>& moveit::planning_interface::MoveGroupInterface::getLinkNames()
+{
+  return impl_->getJointModelGroup()->getLinkModelNames();
+}
 //
 // std::map<std::string, double>
 // moveit::planning_interface::MoveGroupInterface::getNamedTargetValues(const std::string& name)
