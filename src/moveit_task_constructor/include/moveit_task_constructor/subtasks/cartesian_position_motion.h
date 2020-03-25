@@ -52,6 +52,7 @@ protected:
 
 	rclcpp::Publisher<moveit_msgs::msg::DisplayTrajectory>::SharedPtr pub; //ros::Publisher pub;
 
+	bool _computeFromBeginning();
 	bool _computeFromEnding();
 	void _publishTrajectory(robot_trajectory::RobotTrajectory& trajectory, const moveit::core::RobotState& start); //changed removed const
 };

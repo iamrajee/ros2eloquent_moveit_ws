@@ -1071,7 +1071,7 @@ as the new values that correspond to the group */
 
      NOTE: As of ROS-Melodic these are deprecated and should not be used
      */
-  [[deprecated]] double
+  [[deprecated]] double 
   computeCartesianPath(const JointModelGroup* group, std::vector<RobotStatePtr>& traj, const LinkModel* link,
                        const Eigen::Isometry3d& target, bool global_reference_frame, double max_step,
                        double jump_threshold_factor,
