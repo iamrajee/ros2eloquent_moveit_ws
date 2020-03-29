@@ -64,32 +64,82 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     
     Terminal 1:
     ```
-    $ ros2 run 
+    $ ros2 run cpp_pubsub talker
     ```
     Terminal 2:
     ```
-    $ ros2 run  
+    $ ros2 run  cpp_pubsub listener
     ```
 * ## [py_pubsub](src/py_pubsub)
     > It is package about: python pub sub
+    
+    Terminal 1:
+    ```
+    $ ros2 run py_pubsub talker
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run py_pubsub listener
+    ```
 * ## [cpp_srvcli](src/cpp_srvcli)
     > It is package about: cpp service and client
+    
+    Terminal 1:
+    ```
+    $ ros2 run cpp_srvcli server
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run cpp_srvcli client
+    ```
 * ## [py_srvcli](src/py_srvcli)
     > It is package about: python service and client
+    
+    Terminal 1:
+    ```
+    $ ros2 run py_srvcli server
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run py_srvcli client
+    ```
 * ## [costum_msg_srv](src/costum_msg_srv)
     > It is package about: costum msg and srv, and testing with cpp pub&sub and srv&cli
+    
+    Terminal 1:
+    ```
+    $ ros2 run costum_msg_srv server
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run costum_msg_srv client
+    ```
 * ## [ros_tutorials](src/ros_tutorials)
-    > It is package about: git clone https://github.com/ros/ros_tutorials.git -b eloquent-devel
+    > It is package created using: git clone https://github.com/ros/ros_tutorials.git -b eloquent-devel
+    
 * ## [testpkg_cmake](src/testpkg_cmake)
-    > It is package about: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
+    > It is package created using: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
+    
+    Terminal:
+    ```
+    $ ros2 run testpkg_cmake cpp_node
+    ```
+    
 * ## [testpkg_cmake_simple](src/testpkg_cmake_simple)
-    > It is package about: ros2 pkg create --build-type ament_cmake testpkg_cmake
+    > It is package created using: ros2 pkg create --build-type ament_cmake testpkg_cmake
+    
 * ## [testpkg_python](src/testpkg_python)
-    > It is package about: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
+    > It is package created using: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
+    
+    Terminal:
+    ```
+    $ ros2 run testpkg_python py_node
+    ```
 * ## [testpkg_python_simple](src/testpkg_python_simple)
-    > It is package about: ros2 pkg create --build-type ament_python testpkg_python
+    > It is package created using: ros2 pkg create --build-type ament_python testpkg_python
+    
 * ## [testpkg_simple](src/testpkg_simple)
-    > It is package about: ros2 pkg create testpkg_simple
+    > It is package created using: ros2 pkg create testpkg_simple
 
 ---
 <br/><br/>
