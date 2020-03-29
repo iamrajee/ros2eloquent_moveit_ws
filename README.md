@@ -89,7 +89,7 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     
     Terminal 1:
     ```
-    $ **ros2 run cpp_srvcli server**
+    $ ros2 run cpp_srvcli server
     [INFO] [rclcpp]: Ready to add two ints.
     [INFO] [rclcpp]: Incoming request
     a: 14 b: 3
@@ -106,10 +106,13 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     Terminal 1:
     ```
     $ ros2 run py_srvcli server
+    [INFO] [minimal_service]: Incoming request
+    a: 14 b: 3
     ```
     Terminal 2:
     ```
-    $ ros2 run py_srvcli client
+    $ ros2 run py_srvcli client 14 3
+    [INFO] [minimal_client_async]: Result of add_two_ints: for 14 + 3 = 17
     ```
 * ## [costum_msg_srv](src/costum_msg_srv)
     > It is package about: costum msg and srv, and testing with cpp pub&sub and srv&cli
@@ -120,8 +123,20 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     ```
     Terminal 2:
     ```
-    $ ros2 run costum_msg_srv client
+    $ ros2 run costum_msg_srv client 2 3 1
     ```
+    
+    &
+    
+    Terminal 1:
+    ```
+    $ ros2 run costum_msg_srv talker
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run  costum_msg_srv listener
+    ```
+
 * ## [ros_tutorials](src/ros_tutorials)
     > It is package created using: git clone https://github.com/ros/ros_tutorials.git -b eloquent-devel
     
