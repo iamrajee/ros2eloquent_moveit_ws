@@ -53,18 +53,42 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 
 ## Package description
 
-* ## [testpkg_cmake](src/testpkg_cmake)
-    > It is package about: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
-* ## [testpkg_python](src/testpkg_python)
-    > It is package about: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
-* ## [testpkg2](src/testpkg_simple)
-    > It is package about: testing!
 * ## [moveit2](src/moveit2)
     > It is package about usage moveit2 for motion planning,
     * ### Run demo
     ```
     ros2 launch run_moveit_cpp run_moveit_cpp.launch.py
     ```
+* ## [cpp_pubsub](src/cpp_pubsub)
+    > It is package about: cpp pub sub
+    Terminal 1:
+    ```
+    $ ros2 run 
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run  
+    ```
+* ## [py_pubsub](src/py_pubsub)
+    > It is package about: python pub sub
+* ## [cpp_srvcli](src/cpp_srvcli)
+    > It is package about: cpp service and client
+* ## [py_srvcli](src/py_srvcli)
+    > It is package about: python service and client
+* ## [costum_msg_srv](src/costum_msg_srv)
+    > It is package about: costum msg and srv, and testing with cpp pub&sub and srv&cli
+* ## [ros_tutorials](src/ros_tutorials)
+    > It is package about: git clone https://github.com/ros/ros_tutorials.git -b eloquent-devel
+* ## [testpkg_cmake](src/testpkg_cmake)
+    > It is package about: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
+* ## [testpkg_cmake_simple](src/testpkg_cmake_simple)
+    > It is package about: ros2 pkg create --build-type ament_cmake testpkg_cmake
+* ## [testpkg_python](src/testpkg_python)
+    > It is package about: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
+* ## [testpkg_python_simple](src/testpkg_python_simple)
+    > It is package about: ros2 pkg create --build-type ament_python testpkg_python
+* ## [testpkg_simple](src/testpkg_simple)
+    > It is package about: ros2 pkg create testpkg_simple
 
 ---
 <br/><br/>
