@@ -89,7 +89,7 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     
     Terminal 1:
     ```
-    $ ros2 run cpp_srvcli server
+    $ **ros2 run cpp_srvcli server**
     [INFO] [rclcpp]: Ready to add two ints.
     [INFO] [rclcpp]: Incoming request
     a: 14 b: 3
