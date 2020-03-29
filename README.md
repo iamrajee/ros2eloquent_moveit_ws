@@ -58,25 +58,25 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 
 * ## [moveit2](src/moveit2)
     > It is package about usage moveit2 for motion planning,
-    * ### Run demo
-    ```
-    ros2 launch run_moveit_cpp run_moveit_cpp2.launch.py
-    ```
+    * #### Run
+        ```
+        ros2 launch run_moveit_cpp run_moveit_cpp2.launch.py
+        ```
 * ## [moveit_task_constructor](src/moveit_task_constructor)
     > It is package about moveit_task_constructor for motion planning,
-    * ### Run
-    ```
-    ros2 launch moveit_task_constructor plan_pick
-    ```
-    ```
-    ros2 launch moveit_task_constructor test_plan_current_state
-    ```
-    ```
-    ros2 launch moveit_task_constructor test_plan_gripper
-    ```
-    ```
-    ros2 launch moveit_task_constructor test_plan_generate_grasp_pose
-    ```
+    * #### Run
+        ```
+        ros2 launch moveit_task_constructor plan_pick
+        ```
+        ```
+        ros2 launch moveit_task_constructor test_plan_current_state
+        ```
+        ```
+        ros2 launch moveit_task_constructor test_plan_gripper
+        ```
+        ```
+        ros2 launch moveit_task_constructor test_plan_generate_grasp_pose
+        ```
 * ## [cpp_pubsub](src/cpp_pubsub)
     > It is package about: cpp pub sub
     
