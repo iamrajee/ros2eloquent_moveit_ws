@@ -60,7 +60,7 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
     > It is package about usage moveit2 for motion planning,
     * ### Run demo
     ```
-    ros2 launch run_moveit_cpp run_moveit_cpp.launch.py
+    ros2 launch run_moveit_cpp run_moveit_cpp2.launch.py
     ```
 * ## [cpp_pubsub](src/cpp_pubsub)
     > It is package about: cpp pub sub
