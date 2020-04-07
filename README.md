@@ -1,13 +1,15 @@
 # ROS2 Eloquent Workspace
 
-[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_moveit_ws.svg)](http://badges.mit-license.org) [![GitHub Issues](https://img.shields.io/github/issues/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/pulls) [![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger) [![Gitter](https://badges.gitter.im/iamrajee-ROS/community.svg)](https://gitter.im/iamrajee-ROS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Join our Slack Workspace](https://img.shields.io/badge/Slack%20Workspace-roboticsclubiitpkd.slack.com-blue.svg?logo=slack&longCache=true&style=flat)](https://roboticsclubiitpkd.slack.com) [![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://www.firsttimersonly.com/)
-
+[![Build Status](http://img.shields.io/travis/badges/badgerbadgerbadger.svg?style=flat-square)](https://travis-ci.org/badges/badgerbadgerbadger) [![Coverage Status](http://img.shields.io/coveralls/badges/badgerbadgerbadger.svg?style=flat-square)](https://coveralls.io/r/badges/badgerbadgerbadger) [![MIT License](https://img.shields.io/github/license/iamrajee/ros2eloquent_moveit_ws.svg)](http://badges.mit-license.org) [![GitHub Issues](https://img.shields.io/github/issues/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/issues) [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/iamrajee/ros2eloquent_moveit_ws.svg)](https://github.com/iamrajee/ros2eloquent_moveit_ws/pulls) [![Gitter](https://badges.gitter.im/iamrajee-ROS/community.svg)](https://gitter.im/iamrajee-ROS/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Join our Slack Workspace](https://img.shields.io/badge/Slack%20Workspace-roboticsclubiitpkd.slack.com-blue.svg?logo=slack&longCache=true&style=flat)](https://roboticsclubiitpkd.slack.com) 
+<!---
+[![Gem Version](http://img.shields.io/gem/v/badgerbadgerbadger.svg?style=flat-square)](https://rubygems.org/gems/badgerbadgerbadger)
+[![first-timers-only](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](https://www.firsttimersonly.com/)
+--->
 
 This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on some moveit2 related projects.
 <br/><br/>
 
 ## Table of content
-- [Maintainer](https://github.com/iamrajee/ros2eloquent_moveit_ws#maintainer)
 - [Installation](https://github.com/iamrajee/ros2eloquent_moveit_ws#installation)
 - [Package description](https://github.com/iamrajee/ros2eloquent_moveit_ws#package-description)
 - [Helper scripts](https://github.com/iamrajee/ros2eloquent_moveit_ws#helper-scripts)
@@ -18,14 +20,6 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 - [License](https://github.com/iamrajee/ros2eloquent_moveit_ws#license)
 - [Acknowledgments](https://github.com/iamrajee/ros2eloquent_moveit_ws#acknowledgments)
 <!--- - [xyz](link) --->
-
----
-
-## Maintainer
-|  |  |
-| :---: | --- |
-| ![](https://avatars0.githubusercontent.com/u/25712145?s=200&v=3) | Name : Rajendra Singh<br/> Email  : singh.raj1997@gmail.com<br/> Web    : https://iamrajee.github.io/<br/> LinkedIn    : https://www.linkedin.com/in/rajendra-singh-6b0b3a13a/ |
-|  |  |
 
 ---
 
@@ -53,18 +47,128 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 
 ## Package description
 
-* ## [testpkg_cmake](src/testpkg_cmake)
-    > It is package about: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
-* ## [testpkg_python](src/testpkg_python)
-    > It is package about: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
-* ## [testpkg2](src/testpkg_simple)
-    > It is package about: testing!
 * ## [moveit2](src/moveit2)
     > It is package about usage moveit2 for motion planning,
-    * ### Run demo
+    * #### Run
+        ```
+        ros2 launch run_moveit_cpp run_moveit_cpp2.launch.py
+        ```
+* ## [moveit_task_constructor](src/moveit_task_constructor)
+    > It is package about moveit_task_constructor for motion planning,
+    #### Run
     ```
-    ros2 launch run_moveit_cpp run_moveit_cpp.launch.py
+    ros2 launch moveit_task_constructor plan_pick
     ```
+    ```
+    ros2 launch moveit_task_constructor test_plan_current_state
+    ```
+    ```
+    ros2 launch moveit_task_constructor test_plan_gripper
+    ```
+    ```
+    ros2 launch moveit_task_constructor test_plan_generate_grasp_pose
+    ```
+* ## [cpp_pubsub](src/cpp_pubsub)
+    > It is package about: cpp pub sub
+    
+    Terminal 1:
+    ```
+    $ ros2 run cpp_pubsub talker
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run  cpp_pubsub listener
+    ```
+* ## [py_pubsub](src/py_pubsub)
+    > It is package about: python pub sub
+    
+    Terminal 1:
+    ```
+    $ ros2 run py_pubsub talker
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run py_pubsub listener
+    ```
+* ## [cpp_srvcli](src/cpp_srvcli)
+    > It is package about: cpp service and client
+    
+    Terminal 1:
+    ```
+    $ ros2 run cpp_srvcli server
+    [INFO] [rclcpp]: Ready to add two ints.
+    [INFO] [rclcpp]: Incoming request
+    a: 14 b: 3
+    [INFO] [rclcpp]: sending back response: [17]
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run cpp_srvcli client 14 3
+    [INFO] [rclcpp]: Sum: 17
+    ```
+* ## [py_srvcli](src/py_srvcli)
+    > It is package about: python service and client
+    
+    Terminal 1:
+    ```
+    $ ros2 run py_srvcli server
+    [INFO] [minimal_service]: Incoming request
+    a: 14 b: 3
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run py_srvcli client 14 3
+    [INFO] [minimal_client_async]: Result of add_two_ints: for 14 + 3 = 17
+    ```
+* ## [costum_msg_srv](src/costum_msg_srv)
+    > It is package about: costum msg and srv, and testing with cpp pub&sub and srv&cli
+    
+    Terminal 1:
+    ```
+    $ ros2 run costum_msg_srv server
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run costum_msg_srv client 2 3 1
+    ```
+    
+    &
+    
+    Terminal 1:
+    ```
+    $ ros2 run costum_msg_srv talker
+    ```
+    Terminal 2:
+    ```
+    $ ros2 run  costum_msg_srv listener
+    ```
+
+* ## [ros_tutorials](src/ros_tutorials)
+    > It is package created using: git clone https://github.com/ros/ros_tutorials.git -b eloquent-devel
+    
+* ## [testpkg_cmake](src/testpkg_cmake)
+    > It is package created using: ros2 pkg create --build-type ament_cmake --node-name cpp_node testpkg_cmake
+    
+    Terminal:
+    ```
+    $ ros2 run testpkg_cmake cpp_node
+    ```
+    
+* ## [testpkg_cmake_simple](src/testpkg_cmake_simple)
+    > It is package created using: ros2 pkg create --build-type ament_cmake testpkg_cmake
+    
+* ## [testpkg_python](src/testpkg_python)
+    > It is package created using: ros2 pkg create --build-type ament_python --node-name py_node testpkg_python
+    
+    Terminal:
+    ```
+    $ ros2 run testpkg_python py_node
+    ```
+* ## [testpkg_python_simple](src/testpkg_python_simple)
+    > It is package created using: ros2 pkg create --build-type ament_python testpkg_python
+    
+* ## [testpkg_simple](src/testpkg_simple)
+    > It is package created using: ros2 pkg create testpkg_simple
 
 ---
 <br/><br/>
@@ -175,12 +279,12 @@ This ROS2 eloquent workspace is created on Ubuntu 18.04.  Here I have worked on 
 ---
 
 ## Support
-Reach out to me at one of the following places!
-
-- Website: <a href="https://iamrajee.github.io/" target="_blank">`iamrajee.github.io/`</a>
-- Twitter: <a href="https://twitter.com/i_am_rajee" target="_blank">`@i_am_rajee`</a>
-- Email  : singh.raj1997@gmail.com
-- LinkedIn: at <a href="https://www.linkedin.com/in/rajendra-singh-6b0b3a13a/" target="_blank">`@Rajendra Singh`</a>
+Reach out to me for any help!
+|  |  |
+| :---: | --- |
+| ![](https://avatars0.githubusercontent.com/u/25712145?s=200&v=3) | Name : Rajendra Singh<br/> Email  : singh.raj1997@gmail.com<br/> Web    : https://iamrajee.github.io/<br/> LinkedIn    : https://www.linkedin.com/in/rajendra-singh-6b0b3a13a/<br/> Twitter: <a href="https://twitter.com/i_am_rajee" target="_blank">`@i_am_rajee`</a> |
+|  |  |
+ 
 ---
 
 ## License
